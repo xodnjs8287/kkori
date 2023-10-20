@@ -56,3 +56,13 @@
     ```
 
 <br>
+
+# FE build 
+1. npm i 
+
+
+- expo 환경일시
+npm start 
+
+- 안드로이드 에뮬레이터
+npm run android
