@@ -39,7 +39,7 @@
    - 프로젝트 선택
    - 소스 브랜치 선택 (대부분 develop를 소스 브랜치로 선택)
    - branch name: **지라이슈번호/브랜치종류(be/fe)/구현(feat/build등)/내용**
-   - ![브랜치 생성](/uploads/ca77ea19e1ef0e5e6ab2106ea3411d28/Untitled__1_.png){: width="500"}
+   ![브랜치 생성](/uploads/ca77ea19e1ef0e5e6ab2106ea3411d28/Untitled__1_.png){: width="500"}
 
 ---
 
@@ -51,7 +51,7 @@
 - 이슈번호/커밋종류: 커밋내용 (단답형)
 - 자기 자신의 브랜치 복붙 후 **이슈번호 뒤에서 메짤라/커밋종류/커밋내용 작성**
   - 예) 자신의 브랜치명 S09P31C110-52 까지 복붙 / 커밋종류 / 내용
-  - ![커밋 메시지 예시](/uploads/05c1a49fcb90dc4032212fce9cdaa409/Untitled__2_.png){: width="500"}  
+  ![커밋 메시지 예시](/uploads/05c1a49fcb90dc4032212fce9cdaa409/Untitled__2_.png){: width="500"}  
 
     ```sh
     git add .
@@ -73,7 +73,7 @@
 
 - **Description 을 누르면 템플릿이 나온다**
 
-- ![Untitled__3_](/uploads/f516f628bb080f9a868f414a7f2cb30d/Untitled__3_.png){: width="500"}
+![Untitled__3_](/uploads/f516f628bb080f9a868f414a7f2cb30d/Untitled__3_.png){: width="500"}
 
 
 
