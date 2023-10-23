@@ -38,7 +38,7 @@
 #### 2. **브랜치 생성**
    - 프로젝트 선택
    - 소스 브랜치 선택 (대부분 develop를 소스 브랜치로 선택)
-   - branch name: **지라이슈번호/브랜치종류(be/fe)/구현(feat/build등)/내용**
+   - branch name: **지라이슈번호/브랜치종류(be/fe)/구현(feat/build등)/내용** <br>
    ![브랜치 생성](/uploads/ca77ea19e1ef0e5e6ab2106ea3411d28/Untitled__1_.png){: width="500"}
 
 ---
