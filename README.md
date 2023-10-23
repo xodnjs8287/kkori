@@ -1,4 +1,6 @@
-![꼬리](/uploads/d5d9f7ea6fa2909f463bed4150364f1d/꼬리.png)
+<p align="center">
+  <img src="/uploads/d5d9f7ea6fa2909f463bed4150364f1d/꼬리.png" width="500"/>
+</p>
 
 # 💡 개발 Flow
 1. **지라 태스크 → 브랜치 생성**  
