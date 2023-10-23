@@ -1,12 +1,12 @@
 # 🚨 개발 Flow 🚨
 
-## 💡 
-> **1. 지라 태스크 → 브랜치 생성**
-> **2. IDE에서 해당 브랜치 checkout**
-> **3. 1 Action, 1 Commit**
-> **4. MR 요청 보내기 (Template 내역 작성)**
-> **5. 최소 2명 이상 Approve 시에 Merge(고민중)**
-> **6. Merge는 Merge요청자 혹은 Maintainer(자기 자신이 Merge 하지 않기!!!!)**
+## 💡 개발 Flow
+> **1. 지라 태스크 → 브랜치 생성**<br>
+> **2. IDE에서 해당 브랜치 checkout**<br>
+> **3. 1 Action, 1 Commit**<br>
+> **4. MR 요청 보내기 (Template 내역 작성)**<br>
+> **5. 최소 2명 이상 Approve 시에 Merge(고민중)**<br>
+> **6. Merge는 Merge요청자 혹은 Maintainer(자기 자신이 Merge 하지 않기!!!!)**<br>
 > **!! 작업을 완료한 브랜치는 Merge 후 삭제하기 !!**
 
 ---
