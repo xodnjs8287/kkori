@@ -31,13 +31,13 @@
 ## Jira를 통해 브랜치 생성하는 방법
 
 1. **Jira에서 태스크 클릭 후 “브랜치 만들기” 클릭 후 GitLab에서 브랜치 만들기 클릭**  
-   ![Jira 브랜치 생성](/uploads/250c8ddd34e9d21f153ab1351e8ee864/Untitled.png)  
+   ![Jira 브랜치 생성](/uploads/250c8ddd34e9d21f153ab1351e8ee864/Untitled.png){: width="500"}  
    
 2. **브랜치 생성**
    - 프로젝트 선택
    - 소스 브랜치 선택 (대부분 develop를 소스 브랜치로 선택)
    - branch name: **지라이슈번호/브랜치종류(be/fe)/구현(feat/build등)/내용**
-   - ![브랜치 생성](/uploads/ca77ea19e1ef0e5e6ab2106ea3411d28/Untitled__1_.png)
+   - ![브랜치 생성](/uploads/ca77ea19e1ef0e5e6ab2106ea3411d28/Untitled__1_.png){: width="500"}
 
 ---
 
@@ -49,7 +49,7 @@
 - 이슈번호/커밋종류: 커밋내용 (단답형)
 - 자기 자신의 브랜치 복붙 후 **이슈번호 뒤에서 메짤라/커밋종류/커밋내용 작성**
   - 예) 자신의 브랜치명 S09P31C110-52 까지 복붙 / 커밋종류 / 내용
-  - ![커밋 메시지 예시](/uploads/05c1a49fcb90dc4032212fce9cdaa409/Untitled__2_.png)  
+  - ![커밋 메시지 예시](/uploads/05c1a49fcb90dc4032212fce9cdaa409/Untitled__2_.png){: width="500"}  
 
     ```sh
     git add .
