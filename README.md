@@ -66,3 +66,25 @@
   - chore: 잡일
   - style: CSS 수정
   - docs: 문서 작성
+
+
+# 🍕자주사용하는 명령어
+```
+# 모든 브랜치 보기, 탭을 통해 체크아웃하면서 볼 수 있다.
+git branch -a
+
+# 브랜치 이동
+git checkout 브랜치명
+
+# develop 브랜치 최신화(develop 땡겨오기 전에 한번 꼭하기)
+git remote update develop
+
+# 머지된 develop 내 브랜치에 병합
+git pull origin develop
+```
+
+# 👑 시작하기
+```
+1. npm i
+2. npm run android
+```
