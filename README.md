@@ -62,7 +62,11 @@
 
 ##  - 2. 시 작
 ### - expo 환경일시
-npm start 
+
+npm start
 
 ### - 안드로이드 에뮬레이터
+
 npm run android
+
+## hihi
