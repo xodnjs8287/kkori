@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image  } from 'react-native';
 
-function Main() {
+function MainPage() {
   return (
     <View style={styles.container}>
 
@@ -15,7 +15,7 @@ function Main() {
       <View style={styles.borderLine} />
 
 
-      {/* 위쪽 섹션 */}
+      {/* 위쪽 */}
       <View style={[styles.section, { flex: 2, flexDirection: 'row' }]}>
         <TouchableOpacity style={[styles.button, styles.buttonMap]}>
           <Image source={require('../assets/main/지도로찾기.png')} style={styles.buttonImage} />
@@ -33,7 +33,6 @@ function Main() {
       </View>
 
       {/* 아래쪽 */}
-      {/* 아래쪽 섹션 */}
       <View style={[styles.section, { flex: 2, flexDirection: 'row' }]}>
         <TouchableOpacity style={[styles.button, styles.qrscan, { flex: 2 }]}>
           <Image source={require('../assets/main/스캔.png')} style={styles.buttonImage} />
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 2,
+ 
   },
   titleImage: {
     width: 150, 
@@ -125,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default MainPage;
