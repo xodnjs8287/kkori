@@ -60,6 +60,7 @@
 # FE build 
 1. npm i 
 
+2. 시작
 
 - expo 환경일시
 npm start 
