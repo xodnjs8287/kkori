@@ -1,6 +1,6 @@
-# 🚨 개발 Flow 🚨
+# 
 
-## 💡 개발 Flow
+# 💡 개발 Flow
 1. **지라 태스크 → 브랜치 생성**  
 2. **IDE에서 해당 브랜치 checkout**  
 3. **1 Action, 1 Commit**  
