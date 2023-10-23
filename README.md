@@ -57,12 +57,10 @@
 
 <br>
 
-# FE build
+# - FE build 
+##  - 1. npm i 
 
-## 1. npm i
-
-## 2. 시 작
-
+##  - 2. 시 작
 ### - expo 환경일시
 
 npm start
