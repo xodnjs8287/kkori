@@ -66,6 +66,12 @@
   - chore: 잡일
   - style: CSS 수정
   - docs: 문서 작성
+  
+# ✅Pull Request Template
+
+- **Description 을 누르면 템플릿이 나온다**
+
+
 
 
 # 🍕자주사용하는 명령어
