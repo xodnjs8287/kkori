@@ -71,4 +71,4 @@ npm start
 
 npm run android
 
-하이욤.
+## hihi
