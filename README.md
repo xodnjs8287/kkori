@@ -88,4 +88,13 @@ git checkout 브랜치명 # 브랜치 이동
 git remote update develop # develop 브랜치 최신화(develop 땡겨오기 전에 한번 꼭하기)
 git pull origin develop # 머지된 develop 내 브랜치에 병합
 
+##  - 2. 시 작
+### - expo 환경일시
 
+npm start
+
+### - 안드로이드 에뮬레이터
+
+npm run android
+
+## hihi
