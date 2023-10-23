@@ -84,11 +84,19 @@
 
 
 # 자주쓰는 명령어
-git branch -a # 모든 브랜치 보기, 탭을 통해 체크아웃하면서 볼 수 있다.
-git checkout 브랜치명 # 브랜치 이동 
-git remote update develop # develop 브랜치 최신화(develop 땡겨오기 전에 한번 꼭하기)
-git pull origin develop # 머지된 develop 내 브랜치에 병합
+```
+# 모든 브랜치 보기, 탭을 통해 체크아웃하면서 볼 수 있다.
+git branch -a
 
+# 브랜치 이동
+git checkout 브랜치명
+
+# develop 브랜치 최신화(develop 땡겨오기 전에 한번 꼭하기)
+git remote update develop
+
+# 머지된 develop 내 브랜치에 병합
+git pull origin develop
+```
 ##  - 2. 시 작
 ### - expo 환경일시
 
