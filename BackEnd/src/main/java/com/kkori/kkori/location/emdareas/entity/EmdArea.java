@@ -1,6 +1,6 @@
 package com.kkori.kkori.location.emdareas.entity;
 
-import com.kkori.kkori.location.sidoareas.entity.SiggArea;
+import com.kkori.kkori.location.siggareas.entity.SiggArea;
 import com.kkori.kkori.location.userregion.entity.UserRegion;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

@@ -1,5 +1,6 @@
 package com.kkori.kkori.location.sidoareas.entity;
 
+import com.kkori.kkori.location.siggareas.entity.SiggArea;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
@@ -28,6 +29,6 @@ public class SidoArea {
     private String sidoName;
 
     @OneToMany(mappedBy = "sidoArea", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<com.kkori.kkori.location.sidoareas.entity.SiggArea> siggAreas = new ArrayList<>();
+    private List<SiggArea> siggAreas = new ArrayList<>();
 
 }
