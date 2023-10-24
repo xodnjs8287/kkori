@@ -1,23 +1,29 @@
 package com.kkori.kkori.member.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.kkori.kkori.location.userregion.entity.UserRegion;
+import com.kkori.kkori.postlike.entity.PostLike;
+import com.kkori.kkori.review.entity.Review;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
+@EqualsAndHashCode
 @DynamicInsert
 @ToString
 public class Member extends BaseEntity {
     @Id
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
@@ -30,13 +36,22 @@ public class Member extends BaseEntity {
     private String birthday;
     @Column(nullable = false)
     private String gender;
-    @Embedded
-    @Column(name="oauth_provider") // Eebedded 가아님 enumerate 임 -> 테이블에 적용 안된 상태 / 그치만 현재 필요 x
+
+    @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
     @Column(nullable = true, name = "refresh_token") // 초기에는 없음
     private String refreshToken;
     @Embedded
     private MemberInfo memberInfo;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserRegion> userRegions = new HashSet<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostLike> postLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public void reJoinMember(MemberInfo memberInfo){
         this.memberInfo = memberInfo;
