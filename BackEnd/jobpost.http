@@ -1,0 +1,10 @@
+POST localhost:8080/api/post-job
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTg4MDA0OTB9.Y3FcgIgfesfkSPJffSEjKQvbaV6ZMnjDdHuAsHakukITn3CNYLhgiFm50mqaqN-qj9EKO6II1E2Iz_i4q0uXRw
+
+{
+  "title" : "제목",
+  "content": "내용",
+  "payment": 1231323
+
+}
