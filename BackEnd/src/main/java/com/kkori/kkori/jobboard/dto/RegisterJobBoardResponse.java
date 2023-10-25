@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor
@@ -23,9 +24,9 @@ public class RegisterJobBoardResponse {
     public RegisterJobBoardResponse (JobBoard jobBoard) {
 
         this.jobBoardId = jobBoard.getPostId();
-        this.title = jobBoard.getTitleValue();
-        this.content = jobBoard.getContentValue();
-        this.payment = jobBoard.getPayment();
+        this.title = Optional.ofNullable(jobBoard.getTitleValue()).orElse(null);
+        this.content = Optional.ofNullable(jobBoard.getContentValue()).orElse(null);
+        this.payment = Optional.ofNullable(jobBoard.getPayment()).orElse(null);
 
     }
 }

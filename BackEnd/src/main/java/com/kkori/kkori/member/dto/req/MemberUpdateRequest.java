@@ -1,18 +1,17 @@
 package com.kkori.kkori.member.dto.req;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Data
+@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-@SuperBuilder
 public class MemberUpdateRequest {
     private String nickName;
     private String introduce;
 
-    public MemberUpdateRequest(String nickName, String introduce) {
-        this.nickName = nickName;
-        this.introduce = introduce;
-    }
+
 }
