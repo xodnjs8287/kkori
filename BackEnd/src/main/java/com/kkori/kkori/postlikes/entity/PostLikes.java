@@ -1,4 +1,4 @@
-package com.kkori.kkori.postlike.entity;
+package com.kkori.kkori.postlikes.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
 import com.kkori.kkori.jobboard.entity.JobBoard;
@@ -17,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class PostLike extends BaseEntity {
+public class PostLikes extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

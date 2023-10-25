@@ -86,8 +86,9 @@ public enum ErrorCode {
 
     USER_FORBIDDEN_ERROR(HttpStatus.FORBIDDEN, "해당 요청의 접근권한이 없습니다."),
 
-    POST_SCOPE_ERROR(HttpStatus.BAD_REQUEST, "게시글 범위가 유효하지 않습니다." );
+    POST_SCOPE_ERROR(HttpStatus.BAD_REQUEST, "게시글 범위가 유효하지 않습니다." ),
 
+    VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "요효성 검사에 실패 하였습니다.");
 
     private final HttpStatus status;
     private final String message;

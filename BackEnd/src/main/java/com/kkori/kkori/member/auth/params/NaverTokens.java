@@ -1,4 +1,4 @@
-package com.kkori.kkori.auth.params;
+package com.kkori.kkori.member.auth.params;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

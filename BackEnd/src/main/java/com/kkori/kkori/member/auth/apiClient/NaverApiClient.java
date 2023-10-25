@@ -1,9 +1,9 @@
-package com.kkori.kkori.auth.apiClient;
+package com.kkori.kkori.member.auth.apiClient;
 
-import com.kkori.kkori.auth.dto.res.NaverInfoResponse;
-import com.kkori.kkori.auth.dto.res.OAuthInfoResponse;
-import com.kkori.kkori.auth.params.NaverTokens;
-import com.kkori.kkori.auth.params.OAuthLoginParams;
+import com.kkori.kkori.member.auth.dto.res.NaverInfoResponse;
+import com.kkori.kkori.member.auth.dto.res.OAuthInfoResponse;
+import com.kkori.kkori.member.auth.params.NaverTokens;
+import com.kkori.kkori.member.auth.params.OAuthLoginParams;
 import com.kkori.kkori.member.entity.OAuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

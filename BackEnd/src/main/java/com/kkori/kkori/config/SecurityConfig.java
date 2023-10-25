@@ -1,7 +1,7 @@
 package com.kkori.kkori.config;
 
-import com.kkori.kkori.auth.tokens.JwtAuthenticationFilter;
-import com.kkori.kkori.auth.tokens.JwtTokenProvider;
+import com.kkori.kkori.member.auth.tokens.JwtAuthenticationFilter;
+import com.kkori.kkori.member.auth.tokens.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

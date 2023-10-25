@@ -1,4 +1,4 @@
-package com.kkori.kkori.postlike.service;
+package com.kkori.kkori.postlikes.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

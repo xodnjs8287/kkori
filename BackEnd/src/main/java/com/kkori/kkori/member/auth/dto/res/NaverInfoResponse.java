@@ -1,4 +1,4 @@
-package com.kkori.kkori.auth.dto.res;
+package com.kkori.kkori.member.auth.dto.res;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

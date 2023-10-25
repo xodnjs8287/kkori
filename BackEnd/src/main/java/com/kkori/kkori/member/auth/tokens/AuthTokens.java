@@ -1,4 +1,4 @@
-package com.kkori.kkori.auth.tokens;
+package com.kkori.kkori.member.auth.tokens;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

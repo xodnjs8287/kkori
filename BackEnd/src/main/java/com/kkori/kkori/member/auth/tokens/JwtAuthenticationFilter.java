@@ -1,4 +1,4 @@
-package com.kkori.kkori.auth.tokens;
+package com.kkori.kkori.member.auth.tokens;
 
 import com.kkori.kkori.error.entity.CustomException;
 import com.kkori.kkori.error.entity.ErrorCode;
@@ -62,7 +62,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // 헤더에서 토큰 추출
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-//        log.info("{}", bearerToken);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
             return bearerToken.substring(7);
         }

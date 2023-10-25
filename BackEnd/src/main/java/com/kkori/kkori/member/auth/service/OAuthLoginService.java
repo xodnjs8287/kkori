@@ -1,9 +1,9 @@
-package com.kkori.kkori.auth.service;
+package com.kkori.kkori.member.auth.service;
 
-import com.kkori.kkori.auth.dto.res.OAuthInfoResponse;
-import com.kkori.kkori.auth.params.OAuthLoginParams;
-import com.kkori.kkori.auth.tokens.AuthTokens;
-import com.kkori.kkori.auth.tokens.AuthTokensGenerator;
+import com.kkori.kkori.member.auth.dto.res.OAuthInfoResponse;
+import com.kkori.kkori.member.auth.params.OAuthLoginParams;
+import com.kkori.kkori.member.auth.tokens.AuthTokens;
+import com.kkori.kkori.member.auth.tokens.AuthTokensGenerator;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.entity.MemberInfo;
 import com.kkori.kkori.member.repository.MemberRepository;

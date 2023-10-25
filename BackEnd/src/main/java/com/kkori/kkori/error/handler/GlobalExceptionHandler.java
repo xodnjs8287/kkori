@@ -1,9 +1,10 @@
 package com.kkori.kkori.error.handler;
 
-import com.kkori.kkori.error.dto.ErrorResponse;
 import com.kkori.kkori.error.entity.CustomException;
 import com.kkori.kkori.error.entity.ErrorCode;
+import com.kkori.kkori.error.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -41,6 +42,8 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(ErrorCode.METHOD_NOT_ALLOWED));
     }
 
+
+
     /*
      * HTTP 500 Exception
      */
@@ -52,5 +55,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus().value())
                 .body(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<String> handleIllegalStateException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

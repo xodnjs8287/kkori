@@ -4,7 +4,10 @@ import com.kkori.kkori.baseEntity.BaseEntity;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.validation_field.Content;
 import com.kkori.kkori.validation_field.Title;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -34,8 +37,29 @@ public class JobBoard extends BaseEntity {
     private Integer payment;
 
     @ManyToOne
-    @JoinColumn (name = "member_id")
+    @JoinColumn(name = "member_id")
     private Member member;
+
+    public void assignMember(Member member) {
+        if (this.member != null) {
+            throw new IllegalStateException("이미 이 글이 할당된 멤버가 있음");
+        }
+        this.member = member;
+    }
+
+    public String getTitleValue() {
+        if (this.title != null) {
+            return title.getTitle();
+        }
+        return null;
+    }
+
+    public String getContentValue() {
+        if (this.content != null) {
+            return content.getContent();
+        }
+        return null;
+    }
 
 
 }

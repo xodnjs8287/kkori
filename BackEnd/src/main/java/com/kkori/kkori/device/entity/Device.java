@@ -1,6 +1,7 @@
 package com.kkori.kkori.device.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
+import com.kkori.kkori.dogimages.entity.DogImages;
 import com.kkori.kkori.member.entity.Member;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -47,6 +50,9 @@ public class Device extends BaseEntity {
     private Boolean isLostDog;
 
     private Boolean isRegistered;
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DogImages> dogImages = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "member_id")

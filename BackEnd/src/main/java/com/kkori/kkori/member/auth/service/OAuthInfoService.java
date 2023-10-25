@@ -1,8 +1,8 @@
-package com.kkori.kkori.auth.service;
+package com.kkori.kkori.member.auth.service;
 
-import com.kkori.kkori.auth.apiClient.OAuthApiClient;
-import com.kkori.kkori.auth.dto.res.OAuthInfoResponse;
-import com.kkori.kkori.auth.params.OAuthLoginParams;
+import com.kkori.kkori.member.auth.apiClient.OAuthApiClient;
+import com.kkori.kkori.member.auth.dto.res.OAuthInfoResponse;
+import com.kkori.kkori.member.auth.params.OAuthLoginParams;
 import com.kkori.kkori.member.entity.OAuthProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

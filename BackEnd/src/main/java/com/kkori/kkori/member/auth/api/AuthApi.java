@@ -1,8 +1,8 @@
-package com.kkori.kkori.auth.api;
+package com.kkori.kkori.member.auth.api;
 
-import com.kkori.kkori.auth.params.NaverLoginParams;
-import com.kkori.kkori.auth.service.OAuthLoginService;
-import com.kkori.kkori.auth.tokens.AuthTokens;
+import com.kkori.kkori.member.auth.params.NaverLoginParams;
+import com.kkori.kkori.member.auth.service.OAuthLoginService;
+import com.kkori.kkori.member.auth.tokens.AuthTokens;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

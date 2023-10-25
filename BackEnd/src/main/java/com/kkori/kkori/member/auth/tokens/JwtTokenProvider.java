@@ -1,4 +1,4 @@
-package com.kkori.kkori.auth.tokens;
+package com.kkori.kkori.member.auth.tokens;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

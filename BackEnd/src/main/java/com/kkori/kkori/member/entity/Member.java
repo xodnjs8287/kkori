@@ -1,8 +1,10 @@
 package com.kkori.kkori.member.entity;
 
+import com.kkori.kkori.chatroom.entity.ChatRoom;
 import com.kkori.kkori.baseEntity.BaseEntity;
+import com.kkori.kkori.device.entity.Device;
 import com.kkori.kkori.location.userregion.entity.UserRegion;
-import com.kkori.kkori.postlike.entity.PostLike;
+import com.kkori.kkori.postlikes.entity.PostLikes;
 import com.kkori.kkori.review.entity.Review;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -48,10 +50,16 @@ public class Member extends BaseEntity {
     private Set<UserRegion> userRegions = new HashSet<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostLike> postLikes = new ArrayList<>();
+    private List<PostLikes> postLikes = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChatRoom> chatRooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Device> devices = new ArrayList<>();
 
     public void reJoinMember(MemberInfo memberInfo){
         this.memberInfo = memberInfo;

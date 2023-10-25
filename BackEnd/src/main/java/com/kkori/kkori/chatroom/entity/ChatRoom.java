@@ -27,7 +27,7 @@ public class ChatRoom extends BaseEntity {
     private Long chatRoomId;
 
     @ManyToOne
-    @JoinColumn(name = "member_Id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne
