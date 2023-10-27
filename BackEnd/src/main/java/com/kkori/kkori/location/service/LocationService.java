@@ -1,10 +1,10 @@
 package com.kkori.kkori.location.service;
 
 import com.kkori.kkori.location.dto.LocationRequest;
-import com.kkori.kkori.location.dto.LocationResponse;
 import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.location.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -19,6 +19,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class LocationService {
 
@@ -27,28 +28,36 @@ public class LocationService {
     @Transactional
     public LocationInfo callApi(LocationRequest locationRequest) {
         String apikey = "2E7D778C-C966-39D3-9CC9-20E922BD6543";
-        String searchType = "road";
+        String searchType = "both";
         String searchPoint = Double.toString(locationRequest.getLatitude()) + "," + Double.toString(locationRequest.getLongitude());
         String epsg = "epsg:4326";
 
         StringBuilder sb = new StringBuilder("https://api.vworld.kr/req/address");
         sb.append("?service=address");
-        sb.append("&request=getaddress");
-        sb.append("&format=json");
+        sb.append("&request=getAddress");
+        sb.append("&version=2.0");
         sb.append("&crs=").append(epsg);
-        sb.append("&key=").append(apikey);
-        sb.append("&type=").append(searchType);
         sb.append("&point=").append(searchPoint);
+        sb.append("&format=json");
+        sb.append("&type=").append(searchType);
+        sb.append("&zipcode=true");
+        sb.append("&simple=false");
+        sb.append("&key=").append(apikey);
+
+        log.info(" 사이트 {}", sb.toString());
 
         try {
             var jspa = new JSONParser();
             JSONObject jsob = (JSONObject) jspa.parse(new BufferedReader(new InputStreamReader(new URL(sb.toString()).openStream(), StandardCharsets.UTF_8)));
             JSONObject jsrs = (JSONObject) jsob.get("response");
-            JSONArray jsonArray = (JSONArray) jsrs.get("result");
+            JSONArray jsonArray = jsrs != null ? (JSONArray) jsrs.get("result") : null;
 
-            if (jsonArray.size() > 0) {
+            log.info(" 주소 {}", jsob);
+
+            if (jsonArray != null && !jsonArray.isEmpty()) {
                 JSONObject jsonfor = (JSONObject) jsonArray.get(0);
                 String fullAddress = (String) jsonfor.get("text");
+
 
                 String[] addressParts = fullAddress.split(" ");
                 String city = addressParts[0];

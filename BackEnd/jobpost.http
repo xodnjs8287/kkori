@@ -1,14 +1,13 @@
 POST localhost:8080/api/post-job
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTg5OTkxNTB9.38NeYZKBjkIrORiBuBs9Xnjhdx7huaq8zS0JVHH_1_KrZcAAYgelvpOaGef5q3LQIL5K2uOZ_N8bbputfPhw6w
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTkwMDA0NzJ9.6542G4iCVFoPPNfUVZu66BEik-Gckb9bggLqFK26nJ1-7RMo-6NyrWuqqXf8EG1eova-vaC0vyKseO3mUlcucQ
 
 {
   "title" : "제목",
   "content": "내용",
   "payment": 1231323,
   "location": {
-    "latitude": 126.81166020651273,
-    "longitude": 35.20522514379333
+    "latitude":126.79526738238,
+    "longitude":35.202118917126
   }
-
 }
