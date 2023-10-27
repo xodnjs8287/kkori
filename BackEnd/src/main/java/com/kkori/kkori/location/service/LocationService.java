@@ -1,0 +1,90 @@
+package com.kkori.kkori.location.service;
+
+import com.kkori.kkori.location.dto.LocationRequest;
+import com.kkori.kkori.location.dto.LocationResponse;
+import com.kkori.kkori.location.entity.LocationInfo;
+import com.kkori.kkori.location.repository.LocationRepository;
+import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
+@Service
+@RequiredArgsConstructor
+public class LocationService {
+
+    private final LocationRepository locationRepository;
+
+    @Transactional
+    public LocationInfo callApi(LocationRequest locationRequest) {
+        String apikey = "2E7D778C-C966-39D3-9CC9-20E922BD6543";
+        String searchType = "road";
+        String searchPoint = Double.toString(locationRequest.getLatitude()) + "," + Double.toString(locationRequest.getLongitude());
+        String epsg = "epsg:4326";
+
+        StringBuilder sb = new StringBuilder("https://api.vworld.kr/req/address");
+        sb.append("?service=address");
+        sb.append("&request=getaddress");
+        sb.append("&format=json");
+        sb.append("&crs=").append(epsg);
+        sb.append("&key=").append(apikey);
+        sb.append("&type=").append(searchType);
+        sb.append("&point=").append(searchPoint);
+
+        try {
+            var jspa = new JSONParser();
+            JSONObject jsob = (JSONObject) jspa.parse(new BufferedReader(new InputStreamReader(new URL(sb.toString()).openStream(), StandardCharsets.UTF_8)));
+            JSONObject jsrs = (JSONObject) jsob.get("response");
+            JSONArray jsonArray = (JSONArray) jsrs.get("result");
+
+            if (jsonArray.size() > 0) {
+                JSONObject jsonfor = (JSONObject) jsonArray.get(0);
+                String fullAddress = (String) jsonfor.get("text");
+
+                String[] addressParts = fullAddress.split(" ");
+                String city = addressParts[0];
+                String dong = addressParts[addressParts.length - 1].replace("(", "").replace(")", "");
+
+                LocationInfo existingLocationInfo = locationRepository.findByLatitudeAndLongitude(
+                        BigDecimal.valueOf(locationRequest.getLatitude()),
+                        BigDecimal.valueOf(locationRequest.getLongitude())
+                ).orElse(null);
+
+                if (existingLocationInfo != null) {
+                    return existingLocationInfo;
+                }
+
+                LocationInfo locationInfo = LocationInfo.builder()
+                        .latitude(BigDecimal.valueOf(locationRequest.getLatitude()))
+                        .longitude(BigDecimal.valueOf(locationRequest.getLongitude()))
+                        .city(city)
+                        .dong(dong)
+                        .build();
+
+                existingLocationInfo = locationRepository.findByLatitudeAndLongitude(
+                        locationInfo.getLatitude(),
+                        locationInfo.getLongitude()
+                ).orElse(null);
+
+                if (existingLocationInfo != null) {
+                    return existingLocationInfo;
+                }
+
+                return locationRepository.save(locationInfo);
+            } else {
+                throw new IllegalStateException("Address not found");
+            }
+        } catch (IOException | net.minidev.json.parser.ParseException e) {
+            throw new IllegalStateException("Internal Server Error", e);
+        }
+    }
+}

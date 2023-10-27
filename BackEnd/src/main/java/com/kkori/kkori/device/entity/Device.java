@@ -51,8 +51,7 @@ public class Device extends BaseEntity {
 
     private Boolean isRegistered;
 
-    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DogImages> dogImages = new ArrayList<>();
+    private String dogImages;
 
     @ManyToOne
     @JoinColumn(name = "member_id")

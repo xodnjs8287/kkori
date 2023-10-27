@@ -1,6 +1,6 @@
 package com.kkori.kkori.location.userregion.entity;
 
-import com.kkori.kkori.location.emdareas.entity.EmdArea;
+import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.member.entity.Member;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,6 +32,6 @@ public class UserRegion {
     @ManyToOne
     @MapsId("regionId")
     @JoinColumn(name = "region_id")
-    private EmdArea emdArea;
+    private LocationInfo locationInfo;
 
 }

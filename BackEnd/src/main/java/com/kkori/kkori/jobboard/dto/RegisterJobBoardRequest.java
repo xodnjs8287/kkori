@@ -1,6 +1,7 @@
 package com.kkori.kkori.jobboard.dto;
 
 import com.kkori.kkori.jobboard.entity.JobBoard;
+import com.kkori.kkori.location.dto.LocationRequest;
 import com.kkori.kkori.validation_field.Content;
 import com.kkori.kkori.validation_field.Title;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,9 @@ public class RegisterJobBoardRequest {
 
     @NotNull (message = "페이는 빈값일 수 없습니다.")
     private int payment;
+
+    private LocationRequest location;
+
 
     public JobBoard toJobBoard(){
         return JobBoard

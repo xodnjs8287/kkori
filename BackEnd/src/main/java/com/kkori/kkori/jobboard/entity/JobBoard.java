@@ -1,6 +1,7 @@
 package com.kkori.kkori.jobboard.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
+import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.validation_field.Content;
 import com.kkori.kkori.validation_field.Title;
@@ -37,14 +38,24 @@ public class JobBoard extends BaseEntity {
     private Integer payment;
 
     @ManyToOne
+    @JoinColumn(name = "location_info_id")
+    private LocationInfo locationInfo;
+
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
 
     public void assignMember(Member member) {
         if (this.member != null) {
             throw new IllegalStateException("이미 이 글이 할당된 멤버가 있음");
         }
         this.member = member;
+    }
+
+    public void assignLocation(LocationInfo locationInfo) {
+        this.locationInfo = locationInfo;
+        locationInfo.getJobBoards().add(this);
     }
 
     public String getTitleValue() {

@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.kkori.kkori"))
                 .paths(PathSelectors.any())
                 .build()
-//                .host("https://i9c203.p.ssafy.io/api")
+                .host("http://localhost:8080/api")
                 .securitySchemes(Arrays.asList(apiKey()))
                 .securityContexts(Arrays.asList(securityContext()))
                 .apiInfo(apiInfo());

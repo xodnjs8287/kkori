@@ -41,8 +41,10 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/api/member","/api/auth/naver", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-resources/**","/api/post-management/**","/api/member-management/**", "/api/openvidu-management/**").permitAll()
-                .anyRequest().authenticated()
+//                .antMatchers("/api/member","/api/auth/naver", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-resources/**","/api/post-management/**","/api/member-management/**", "/api/openvidu-management/**").permitAll()
+
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();

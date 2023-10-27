@@ -2,6 +2,6 @@ POST localhost:8080/api/auth/naver
 Content-Type: application/json
 
 {
-  "authorizationCode": "vRI09CrZjxuQdnhmoS",
+  "authorizationCode": "TGa3DATkTVC00hP8Iw",
   "state": null
 }

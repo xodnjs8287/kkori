@@ -1,0 +1,8 @@
+GET localhost:8080/address/api
+Content-Type: application/json
+
+{
+
+  "latitude": 126.81166020651273,
+  "longitude": 35.20522514379333
+}
