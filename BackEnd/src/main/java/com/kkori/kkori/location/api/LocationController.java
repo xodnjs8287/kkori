@@ -17,5 +17,4 @@ public class LocationController {
 
     private final LocationService locationService;
 
-
 }

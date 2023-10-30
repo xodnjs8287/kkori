@@ -28,5 +28,6 @@ public class PostLikes extends BaseEntity {
     private Member member;
 
     @ManyToOne
+    @JoinColumn(name = "post_id")
     private JobBoard jobBoard;
 }

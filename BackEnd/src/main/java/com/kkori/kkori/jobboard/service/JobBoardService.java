@@ -4,6 +4,7 @@ import com.kkori.kkori.jobboard.dto.RegisterJobBoardRequest;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
 import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
+import com.kkori.kkori.location.dto.LocationRequest;
 import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.location.repository.LocationRepository;
 import com.kkori.kkori.location.service.LocationService;
@@ -35,13 +36,15 @@ public class JobBoardService {
         JobBoard jobBoard = request.toJobBoard();
         jobBoard.assignMember(member);
 
-        if (request.getLocation() != null) {
+        LocationRequest locationRequest = locationService.callXY(request.getAddress());
+
+        if (locationRequest != null) {
             // 먼저 데이터베이스에서 좌표로 LocationInfo 검색
             LocationInfo locationInfo = locationRepository.findByLatitudeAndLongitude(
-                    BigDecimal.valueOf(request.getLocation().getLatitude()),
-                    BigDecimal.valueOf(request.getLocation().getLongitude())
+                    BigDecimal.valueOf(locationRequest.getLatitude()),
+                    BigDecimal.valueOf(locationRequest.getLongitude())
             ).orElseGet(() ->
-                    locationService.callApi(request.getLocation()));
+                    locationService.callApi(locationRequest));
 
             jobBoard.assignLocation(locationInfo);
         }

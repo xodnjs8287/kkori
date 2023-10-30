@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Service
@@ -25,8 +27,47 @@ public class LocationService {
 
     private final LocationRepository locationRepository;
 
+
+    public LocationRequest callXY(String address){
+        String apikey = "2E7D778C-C966-39D3-9CC9-20E922BD6543";
+        String searchType = "parcel";
+        String searchAddr = address;
+        String epsg = "epsg:4326";
+
+        StringBuilder sb = new StringBuilder("https://api.vworld.kr/req/address");
+        sb.append("?service=address");
+        sb.append("&request=getCoord");
+        sb.append("&format=json");
+        sb.append("&crs=" + epsg);
+        sb.append("&key=" + apikey);
+        sb.append("&type=" + searchType);
+        sb.append("&address=" + URLEncoder.encode(searchAddr, StandardCharsets.UTF_8));
+
+        try{
+            URL url = new URL(sb.toString());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+
+            JSONParser jspa = new JSONParser();
+            JSONObject jsob = (JSONObject) jspa.parse(reader);
+            JSONObject jsrs = (JSONObject) jsob.get("response");
+            JSONObject jsResult = (JSONObject) jsrs.get("result");
+            JSONObject jspoitn = (JSONObject) jsResult.get("point");
+
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setLatitude(Double.valueOf((String) jspoitn.get("x")));
+            locationRequest.setLongitude(Double.valueOf((String) jspoitn.get("y")));
+
+            return locationRequest;
+
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @Transactional
     public LocationInfo callApi(LocationRequest locationRequest) {
+
         String apikey = "2E7D778C-C966-39D3-9CC9-20E922BD6543";
         String searchType = "both";
         String searchPoint = Double.toString(locationRequest.getLatitude()) + "," + Double.toString(locationRequest.getLongitude());
@@ -58,10 +99,19 @@ public class LocationService {
                 JSONObject jsonfor = (JSONObject) jsonArray.get(0);
                 String fullAddress = (String) jsonfor.get("text");
 
-
                 String[] addressParts = fullAddress.split(" ");
+
+
+                for (String addressPart : addressParts) {
+                    log.info(" 주소만 추출 {}", addressPart);
+
+                }
+
+
                 String city = addressParts[0];
-                String dong = addressParts[addressParts.length - 1].replace("(", "").replace(")", "");
+//                String dong = addressParts[addressParts.length - 1].replace("(", "").replace(")", "");
+                String dong = addressParts[2];
+
 
                 LocationInfo existingLocationInfo = locationRepository.findByLatitudeAndLongitude(
                         BigDecimal.valueOf(locationRequest.getLatitude()),

@@ -23,7 +23,7 @@ public class RegisterJobBoardRequest {
     @NotNull (message = "페이는 빈값일 수 없습니다.")
     private int payment;
 
-    private LocationRequest location;
+    private String address;
 
 
     public JobBoard toJobBoard(){
