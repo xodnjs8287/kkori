@@ -1,6 +1,7 @@
 package com.kkori.kkori.jobboard.dto;
 
 import com.kkori.kkori.jobboard.entity.JobBoard;
+import com.kkori.kkori.location.dto.LocationResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,15 @@ public class RegisterJobBoardResponse {
 
     private int payment;
 
+    private LocationResponse locationResponse;
+
     public RegisterJobBoardResponse (JobBoard jobBoard) {
 
         this.jobBoardId = jobBoard.getPostId();
         this.title = Optional.ofNullable(jobBoard.getTitleValue()).orElse(null);
         this.content = Optional.ofNullable(jobBoard.getContentValue()).orElse(null);
         this.payment = Optional.ofNullable(jobBoard.getPayment()).orElse(null);
+        this.locationResponse = Optional.ofNullable(jobBoard.getLocationInfo()).map(LocationResponse::new).orElse(null);
 
     }
 }
