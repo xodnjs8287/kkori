@@ -1,4 +1,4 @@
-package com.kkori.kkori.device.entity;
+package com.kkori.kkori.dog.entity;
 
 
 public enum Gender {

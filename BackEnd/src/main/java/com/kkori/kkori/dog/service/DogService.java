@@ -1,10 +1,10 @@
-package com.kkori.kkori.device.service;
+package com.kkori.kkori.dog.service;
 
 
-import com.kkori.kkori.device.dto.RegisterDogRequest;
-import com.kkori.kkori.device.dto.RegisterDogResponse;
-import com.kkori.kkori.device.entity.Device;
-import com.kkori.kkori.device.repository.DeviceRepository;
+import com.kkori.kkori.dog.dto.RegisterDogRequest;
+import com.kkori.kkori.dog.dto.RegisterDogResponse;
+import com.kkori.kkori.dog.entity.Dog;
+import com.kkori.kkori.dog.repository.DogRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeviceService {
+public class DogService {
 
-    private final DeviceRepository deviceRepository;
+    private final DogRepository dogRepository;
 
     private final MemberRepository memberRepository;
 
@@ -22,10 +22,10 @@ public class DeviceService {
 
         Member member = getMember(memberId);
 
-        Device device = request.toDevice();
+        Dog device = request.toDevice();
         device.setMember(member);
 
-        Device saved = deviceRepository.save(device);
+        Dog saved = dogRepository.save(device);
 
         return new RegisterDogResponse(saved);
     }

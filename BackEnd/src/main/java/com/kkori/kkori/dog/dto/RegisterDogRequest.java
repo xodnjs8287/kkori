@@ -1,7 +1,7 @@
-package com.kkori.kkori.device.dto;
+package com.kkori.kkori.dog.dto;
 
-import com.kkori.kkori.device.entity.Device;
-import com.kkori.kkori.device.entity.Gender;
+import com.kkori.kkori.dog.entity.Dog;
+import com.kkori.kkori.dog.entity.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,22 +27,16 @@ public class RegisterDogRequest {
 
     private Boolean dogNeuter;
 
-    private Boolean isLostDog;
-
-    private Boolean isRegistered;
-
     private String dogImages;
 
-    public Device toDevice(){
-        return Device.builder()
+    public Dog toDevice(){
+        return Dog.builder()
                 .dogName(this.dogName)
                 .dogBirthDay(this.dogBirthDay)
                 .gender(this.gender)
                 .dogBreed(this.dogBreed)
                 .dogWeight(this.dogWeight)
                 .dogNeuter(this.dogNeuter)
-                .isLostDog(this.isLostDog)
-                .isRegistered(this.isRegistered)
                 .dogImages(dogImages)
                 .build();
 

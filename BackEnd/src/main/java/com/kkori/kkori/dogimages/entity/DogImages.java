@@ -1,7 +1,7 @@
 package com.kkori.kkori.dogimages.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
-import com.kkori.kkori.device.entity.Device;
+import com.kkori.kkori.dog.entity.Dog;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +29,6 @@ public class DogImages extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "device_id")
-    private Device device;
+    private Dog device;
 
 }

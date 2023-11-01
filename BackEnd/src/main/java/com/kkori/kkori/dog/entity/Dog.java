@@ -1,7 +1,6 @@
-package com.kkori.kkori.device.entity;
+package com.kkori.kkori.dog.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
-import com.kkori.kkori.dogimages.entity.DogImages;
 import com.kkori.kkori.member.entity.Member;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,8 +13,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -24,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class Device extends BaseEntity {
+public class Dog extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

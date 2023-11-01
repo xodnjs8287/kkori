@@ -1,9 +1,8 @@
 package com.kkori.kkori.walk.entity;
 
-import com.kkori.kkori.device.entity.Device;
+import com.kkori.kkori.dog.entity.Dog;
 import com.kkori.kkori.member.entity.Member;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -45,5 +44,5 @@ public class Walk {
 
     @ManyToOne
     @JoinColumn(name = "device_id")
-    private Device device;
+    private Dog device;
 }

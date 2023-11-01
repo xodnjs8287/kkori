@@ -1,14 +1,12 @@
-package com.kkori.kkori.device.controller;
+package com.kkori.kkori.dog.controller;
 
-import com.kkori.kkori.device.dto.DeviceResponse;
-import com.kkori.kkori.device.dto.RegisterDogRequest;
-import com.kkori.kkori.device.dto.RegisterDogResponse;
-import com.kkori.kkori.device.service.DeviceService;
+import com.kkori.kkori.dog.dto.RegisterDogRequest;
+import com.kkori.kkori.dog.dto.RegisterDogResponse;
+import com.kkori.kkori.dog.service.DogService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/api/device")
 @RequiredArgsConstructor
 @Api
-public class DeviceController {
+public class DogController {
 
-    private final DeviceService deviceService;
+    private final DogService dogService;
 
     @PostMapping("/register-dog")
     public ResponseEntity<RegisterDogResponse> registerDog(
@@ -27,6 +25,6 @@ public class DeviceController {
             ){
 
         long memberId = Long.parseLong(authentication.getName());
-        return ResponseEntity.ok(deviceService.registerDog(memberId,request));
+        return ResponseEntity.ok(dogService.registerDog(memberId,request));
     }
 }

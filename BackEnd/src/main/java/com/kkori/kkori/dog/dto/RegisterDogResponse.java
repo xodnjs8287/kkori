@@ -1,8 +1,7 @@
-package com.kkori.kkori.device.dto;
+package com.kkori.kkori.dog.dto;
 
 
-import com.kkori.kkori.device.entity.Device;
-import com.kkori.kkori.device.entity.Gender;
+import com.kkori.kkori.dog.entity.Dog;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +32,7 @@ public class RegisterDogResponse {
 
     private String dogImages;
 
-    public RegisterDogResponse (Device device){
+    public RegisterDogResponse (Dog device){
         this.dogName = device.getDogName();
         this.dogBreed = device.getDogBreed();
         this.gender = device.getGender().getEnGender();

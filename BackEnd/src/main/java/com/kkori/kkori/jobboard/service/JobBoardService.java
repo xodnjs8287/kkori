@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -39,7 +41,6 @@ public class JobBoardService {
         LocationRequest locationRequest = locationService.callXY(request.getAddress());
 
         if (locationRequest != null) {
-            // 먼저 데이터베이스에서 좌표로 LocationInfo 검색
             LocationInfo locationInfo = locationRepository.findByLatitudeAndLongitude(
                     BigDecimal.valueOf(locationRequest.getLatitude()),
                     BigDecimal.valueOf(locationRequest.getLongitude())
@@ -51,4 +52,16 @@ public class JobBoardService {
 
         return new RegisterJobBoardResponse(jobBoardRepository.save(jobBoard));
     }
+
+    public List<RegisterJobBoardResponse> findAll(){
+        return jobBoardRepository.findAll()
+                .stream()
+                .map(RegisterJobBoardResponse::new)
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
 }

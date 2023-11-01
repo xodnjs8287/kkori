@@ -2,7 +2,7 @@ package com.kkori.kkori.member.entity;
 
 import com.kkori.kkori.chatroom.entity.ChatRoom;
 import com.kkori.kkori.baseEntity.BaseEntity;
-import com.kkori.kkori.device.entity.Device;
+import com.kkori.kkori.dog.entity.Dog;
 import com.kkori.kkori.location.userregion.entity.UserRegion;
 import com.kkori.kkori.postlikes.entity.PostLikes;
 import com.kkori.kkori.review.entity.Review;
@@ -59,7 +59,7 @@ public class Member extends BaseEntity {
     private List<ChatRoom> chatRooms = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Device> devices = new ArrayList<>();
+    private List<Dog> devices = new ArrayList<>();
 
     public void reJoinMember(MemberInfo memberInfo){
         this.memberInfo = memberInfo;
