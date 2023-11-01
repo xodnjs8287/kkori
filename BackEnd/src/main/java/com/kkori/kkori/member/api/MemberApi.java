@@ -1,10 +1,6 @@
 package com.kkori.kkori.member.api;
 
 import com.kkori.kkori.member.service.impl.MemberService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@Api(tags = "Member")
+//@Api(tags = "Member")
 @RestController
 @Slf4j
 @RequiredArgsConstructor

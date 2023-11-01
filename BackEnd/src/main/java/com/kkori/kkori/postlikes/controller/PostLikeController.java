@@ -3,7 +3,6 @@ package com.kkori.kkori.postlikes.controller;
 import com.kkori.kkori.postlikes.dto.PostLikeRequest;
 import com.kkori.kkori.postlikes.dto.PostLikeResponse;
 import com.kkori.kkori.postlikes.service.PostLikeService;
-import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-@Api
+//@Api
 public class PostLikeController {
 
     private final PostLikeService postLikeService;
