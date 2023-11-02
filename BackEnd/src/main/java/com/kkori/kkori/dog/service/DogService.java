@@ -9,6 +9,7 @@ import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class DogService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public RegisterDogResponse registerDog (Long memberId, RegisterDogRequest request){
 
         Member member = getMember(memberId);

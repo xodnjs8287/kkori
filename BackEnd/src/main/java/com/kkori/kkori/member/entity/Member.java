@@ -24,27 +24,37 @@ import java.util.Set;
 @DynamicInsert
 @ToString
 public class Member extends BaseEntity {
+
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false, unique = true)
     private String code;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false, unique = true)
     private String email;
+
     @Column(nullable = false)
     private String birthday;
+
     @Column(nullable = false)
     private String gender;
 
     @Enumerated(EnumType.STRING)
     private OAuthProvider oAuthProvider;
+
     @Column(nullable = true, name = "refresh_token") // 초기에는 없음
     private String refreshToken;
+
     @Embedded
     private MemberInfo memberInfo;
+
+    private String deviceNumber;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserRegion> userRegions = new HashSet<>();
@@ -59,7 +69,7 @@ public class Member extends BaseEntity {
     private List<ChatRoom> chatRooms = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Dog> devices = new ArrayList<>();
+    private List<Dog> dogs = new ArrayList<>();
 
     public void reJoinMember(MemberInfo memberInfo){
         this.memberInfo = memberInfo;

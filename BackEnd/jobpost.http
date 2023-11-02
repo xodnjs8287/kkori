@@ -1,12 +1,12 @@
-POST localhost:8080/api/post-job
+POST https://192.168.100.60:4444/api/post-job
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTkyMzQxNDR9.Uqn9tRdJyG5enaYG9V28pG6Wqede1rXsUryO-YPbfeEjZgT7NFl8ixurBUKGJhCvEvjamXqDJYjsmdhtTFIzcQ
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTkzMzM1MjJ9.7GIUknWVpgaq-j-5j2w_WDKvrYmrWZoQSYni8NrOlAGW-RkKZFG-a4xngdjltQiGgktwZWsY2iJF9emoQpjJDA
 
 {
   "title" : "제목",
   "content": "내용",
   "payment": 1231323,
-  "address" : "신죽리 547"
+  "address" : "수완동 35-9"
 }
 
 ###
