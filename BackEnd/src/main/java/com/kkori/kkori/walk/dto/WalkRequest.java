@@ -27,7 +27,7 @@ public class WalkRequest {
 
     private Member member;
 
-    private Dog device;
+    private Dog dog;
 
     //                .transactionDate(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDateTime())
 }

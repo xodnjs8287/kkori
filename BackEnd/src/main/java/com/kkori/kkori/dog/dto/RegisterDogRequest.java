@@ -40,6 +40,5 @@ public class RegisterDogRequest {
                 .dogImages(dogImages)
                 .build();
 
-
     }
 }

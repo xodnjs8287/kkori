@@ -42,7 +42,4 @@ public class Walk {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne
-    @JoinColumn(name = "device_id")
-    private Dog device;
 }

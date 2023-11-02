@@ -3,6 +3,8 @@ package com.kkori.kkori.member.api;
 import com.kkori.kkori.member.service.impl.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Parameter;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -69,15 +71,14 @@ public class MemberApi {
 //        return ApiResponse.OK(MemberEmail);
 //    }
 //
-//    @Operation(summary = "로그아웃", description = "로그아웃")
-//    @GetMapping("/logout")
-//    public ApiResponse<Void> logout(HttpServletRequest httpServletRequest, @Parameter(hidden = true) @AuthenticationPrincipal User user){
-//        HttpSession session = httpServletRequest.getSession();
-//        session.invalidate();
-//        Long loginId = Long.parseLong(user.getUsername());
-//        memberService.deleteRefreshToken(loginId);
-//        return ApiResponse.OK(null);
-//    }
+    @GetMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest httpServletRequest, @AuthenticationPrincipal User user){
+        HttpSession session = httpServletRequest.getSession();
+        session.invalidate();
+        Long loginId = Long.parseLong(user.getUsername());
+        memberService.deleteRefreshToken(loginId);
+        return ResponseEntity.ok(null);
+    }
 
 //    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴")
 //    @DeleteMapping()

@@ -25,11 +25,8 @@ public class Dog extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long deviceId;
-
-    private String deviceNumber;
-
-    private String qrCode;
+    @Column (name = "dog_id")
+    private Long dogId;
 
     private String dogName;
 

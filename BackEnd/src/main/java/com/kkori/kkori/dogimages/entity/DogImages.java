@@ -27,8 +27,6 @@ public class DogImages extends BaseEntity {
 
     private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "device_id")
-    private Dog device;
+
 
 }
