@@ -24,10 +24,10 @@ public class DogService {
 
         Member member = getMember(memberId);
 
-        Dog device = request.toDevice();
-        device.setMember(member);
+        Dog dog = request.toDog();
+        dog.setMember(member);
 
-        Dog saved = dogRepository.save(device);
+        Dog saved = dogRepository.save(dog);
 
         return new RegisterDogResponse(saved);
     }

@@ -1,2 +1,18 @@
 GET localhost:8080/address/api
 Content-Type: application/json
+
+###
+POST localhost:8080/api/dog/register-dog
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk4NTQ3NTJ9.lR4MvGsfXQZaEMqW2PSi1amYTDcwnVKOtULPWnbKZja1mukMs-A2PhdF7YPm0Eyw62c0FZ_FThs1gU-xTAsZ7A
+
+{
+
+  "dogName" : "발발이",
+  "dogBirthDay" : "2021-04-21",
+  "dogBreed": "말티즈",
+  "dogWeight": 2.421,
+  "dogNeuter": true,
+  "dogImages": "dogImage"
+
+}

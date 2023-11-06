@@ -1,25 +1,30 @@
 package com.kkori.kkori.member.dto.res;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.kkori.kkori.member.entity.Member;
+import lombok.*;
 
-@Data
+import java.util.Objects;
+import java.util.Optional;
+
+@Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class MemberResponse {
     private String nickName;
     private String introduce;
     private String profileImg;
     private String email;
+    private String name;
+    private String deviceNumber;
     private Boolean isMyPage;
 
-    @Builder
-    public MemberResponse(String nickName, String introduce, String profileImg, String email, Boolean isMyPage) {
-        this.nickName = nickName;
-        this.introduce = introduce;
-        this.profileImg = profileImg;
-        this.email = email;
-        this.isMyPage = isMyPage;
+    public MemberResponse (Member member){
+        this.nickName = member.getMemberInfo().getNickName();
+        this.introduce = member.getMemberInfo().getIntroduce();
+        this.email = member.getEmail();
+        this.name = member.getName();
+        this.deviceNumber = Optional.ofNullable(member.getDeviceNumber()).orElse(null);
+        this.profileImg = Optional.ofNullable(member.getMemberInfo().getProfileImg()).orElse(null);
     }
 
 

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,15 +33,22 @@ public class RegisterDogResponse {
 
     private String dogImages;
 
-    public RegisterDogResponse (Dog device){
-        this.dogName = device.getDogName();
-        this.dogBreed = device.getDogBreed();
-        this.gender = device.getGender().getEnGender();
-        this.dogImages = device.getDogImages();
-        this.dogNeuter = device.getDogNeuter();
-        this.dogWeight = device.getDogWeight();
-        this.isRegistered = device.getIsRegistered();
-        this.isLostDog = device.getIsLostDog();
+    public RegisterDogResponse(Dog dog) {
+        if (dog == null) {
+            throw new IllegalArgumentException("dog cannot be null");
+        }
 
+        this.dogName = Optional.ofNullable(dog.getDogName()).orElse(null);
+        this.dogBreed = Optional.ofNullable(dog.getDogBreed()).orElse(null);
+        this.dogBirthDay = Optional.ofNullable(dog.getDogBirthDay()).orElse(null);
+        this.gender = Optional.ofNullable(dog.getGender())
+                .map(gender -> Optional.ofNullable(gender.getEnGender()).orElse(null))
+                .orElse(null);
+        this.dogImages = Optional.ofNullable(dog.getDogImages()).orElse(null);
+        this.dogNeuter = Optional.ofNullable(dog.getDogNeuter()).orElse(false);
+        this.dogWeight = Optional.ofNullable(dog.getDogWeight()).orElse(null);
+        this.isRegistered = Optional.ofNullable(dog.getIsRegistered()).orElse(false);
+        this.isLostDog = Optional.ofNullable(dog.getIsLostDog()).orElse(false);
     }
+
 }

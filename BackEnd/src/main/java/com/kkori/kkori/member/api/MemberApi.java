@@ -1,10 +1,13 @@
 package com.kkori.kkori.member.api;
 
+import com.kkori.kkori.member.dto.res.MemberResponse;
+import com.kkori.kkori.member.service.dto.RegisterMemberDeviceDto;
 import com.kkori.kkori.member.service.impl.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Parameter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -23,20 +26,29 @@ public class MemberApi {
 
     private final MemberService memberService;
 
+    @GetMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest httpServletRequest, @AuthenticationPrincipal User user){
+        HttpSession session = httpServletRequest.getSession();
+        session.invalidate();
+        Long loginId = Long.parseLong(user.getUsername());
+        memberService.deleteRefreshToken(loginId);
+        return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/register-device")
+    public ResponseEntity<RegisterMemberDeviceDto> registerDevice(
+            final Authentication authentication,@RequestBody RegisterMemberDeviceDto registerMemberDeviceDto
+            ){
+        return ResponseEntity.ok(memberService.registerDevice(Long.parseLong(authentication.getName()),registerMemberDeviceDto));
+    }
+
 //    @Operation(summary = "mypage member 조회", description = "email로 mypage member 상세 조회")
-//    @GetMapping("/{email}") // 시큐리티를 사용한다면 로그인이 됐으면 ? user 있을꺼고 나도 사용하고싶당~
-//    public ResponseEntity<MemberResponse> findMemberById(@PathVariable("email") @ApiParam("유저 email") String email, @Parameter(hidden = true) @AuthenticationPrincipal User user){
-//        Long loginId = Long.parseLong(user.getUsername()); //null exception -> 500 에러가 나감.
-//        Long findId = memberQueryService.searchMemberIdByEmail(email);
-//
-//        MemberResponse memberResponse = memberService.findById(findId);
-//        if(loginId == findId){
-//            memberResponse.setIsMyPage(true);
-//        }else{
-//            memberResponse.setIsMyPage(false);
-//        }
-//        return ResponseEntity.ok(memberResponse);
-//    }
+    @GetMapping("/detail") // 시큐리티를 사용한다면 로그인이 됐으면 ? user 있을꺼고 나도 사용하고싶당~
+    public ResponseEntity<MemberResponse> findMemberById( @AuthenticationPrincipal User user){
+        Long loginId = Long.parseLong(user.getUsername()); //null exception -> 500 에러가 나감.
+
+        return ResponseEntity.ok(memberService.findMember(loginId));
+    }
 
 
 
@@ -71,14 +83,7 @@ public class MemberApi {
 //        return ApiResponse.OK(MemberEmail);
 //    }
 //
-    @GetMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest httpServletRequest, @AuthenticationPrincipal User user){
-        HttpSession session = httpServletRequest.getSession();
-        session.invalidate();
-        Long loginId = Long.parseLong(user.getUsername());
-        memberService.deleteRefreshToken(loginId);
-        return ResponseEntity.ok(null);
-    }
+
 
 //    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴")
 //    @DeleteMapping()

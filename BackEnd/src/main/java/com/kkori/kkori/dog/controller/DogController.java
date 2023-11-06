@@ -8,9 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api/dog")
+@RestController
+@RequestMapping("/api/dog")
 @RequiredArgsConstructor
 public class DogController {
 
@@ -21,7 +23,6 @@ public class DogController {
             final Authentication authentication,
             @RequestBody RegisterDogRequest request
             ){
-
         long memberId = Long.parseLong(authentication.getName());
         return ResponseEntity.ok(dogService.registerDog(memberId,request));
     }

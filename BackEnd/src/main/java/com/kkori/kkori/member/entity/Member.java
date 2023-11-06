@@ -82,4 +82,8 @@ public class Member extends BaseEntity {
     public void deleteRefreshToken() {
         this.refreshToken = null;
     }
+
+    public void registerDevice(String deviceNumber){
+        this.deviceNumber = deviceNumber;
+    }
 }

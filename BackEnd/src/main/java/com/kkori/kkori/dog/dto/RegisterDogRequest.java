@@ -29,7 +29,7 @@ public class RegisterDogRequest {
 
     private String dogImages;
 
-    public Dog toDevice(){
+    public Dog toDog(){
         return Dog.builder()
                 .dogName(this.dogName)
                 .dogBirthDay(this.dogBirthDay)
