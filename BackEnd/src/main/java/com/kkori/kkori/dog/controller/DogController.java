@@ -6,10 +6,9 @@ import com.kkori.kkori.dog.service.DogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/dog")
@@ -25,5 +24,14 @@ public class DogController {
             ){
         long memberId = Long.parseLong(authentication.getName());
         return ResponseEntity.ok(dogService.registerDog(memberId,request));
+    }
+
+    @GetMapping("/all/by-member")
+    public ResponseEntity<List<RegisterDogResponse>> findAllByMemberId(
+            final Authentication authentication
+    ){
+        long memberId = Long.parseLong(authentication.getName());
+
+        return ResponseEntity.ok(dogService.findAllDogByMemberId(memberId));
     }
 }

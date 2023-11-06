@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class DogService {
@@ -30,6 +33,14 @@ public class DogService {
         Dog saved = dogRepository.save(dog);
 
         return new RegisterDogResponse(saved);
+    }
+
+    public List<RegisterDogResponse> findAllDogByMemberId(Long memberId){
+        Member member = getMember(memberId);
+        return dogRepository.findAllByMember(member)
+                .stream()
+                .map(RegisterDogResponse::new)
+                .collect(Collectors.toList());
     }
 
     private Member getMember(Long id){

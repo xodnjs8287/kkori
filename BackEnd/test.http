@@ -10,9 +10,15 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJle
 
   "dogName" : "발발이",
   "dogBirthDay" : "2021-04-21",
+  "gender": "MALE",
   "dogBreed": "말티즈",
   "dogWeight": 2.421,
   "dogNeuter": true,
   "dogImages": "dogImage"
 
 }
+
+###
+GET localhost:8080/api/dog/all/by-member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk4NTQ3NTJ9.lR4MvGsfXQZaEMqW2PSi1amYTDcwnVKOtULPWnbKZja1mukMs-A2PhdF7YPm0Eyw62c0FZ_FThs1gU-xTAsZ7A

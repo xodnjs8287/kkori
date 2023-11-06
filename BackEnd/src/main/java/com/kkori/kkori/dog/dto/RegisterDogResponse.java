@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Optional;
 
 @NoArgsConstructor
@@ -20,6 +21,8 @@ public class RegisterDogResponse {
     private LocalDate dogBirthDay;
 
     private String gender;
+
+    private int dogAge;
 
     private String dogBreed;
 
@@ -41,6 +44,12 @@ public class RegisterDogResponse {
         this.dogName = Optional.ofNullable(dog.getDogName()).orElse(null);
         this.dogBreed = Optional.ofNullable(dog.getDogBreed()).orElse(null);
         this.dogBirthDay = Optional.ofNullable(dog.getDogBirthDay()).orElse(null);
+        if (this.dogBirthDay != null) {
+            LocalDate today = LocalDate.now();
+            this.dogAge = Period.between(this.dogBirthDay, today).getYears();
+        } else {
+            this.dogAge = 0; // Default age if birth date is not available
+        }
         this.gender = Optional.ofNullable(dog.getGender())
                 .map(gender -> Optional.ofNullable(gender.getEnGender()).orElse(null))
                 .orElse(null);
