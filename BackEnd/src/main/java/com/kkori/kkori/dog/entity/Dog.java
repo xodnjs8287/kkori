@@ -13,6 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -55,4 +56,18 @@ public class Dog extends BaseEntity {
         this.member = member;
     }
 
+    public void updateDogInfo(String dogName, LocalDate dogBirthDay, Gender gender, String dogBreed,
+                              BigDecimal dogWeight, Boolean dogNeuter, Boolean isLostDog,
+                              Boolean isRegistered, String dogImages) {
+
+        this.dogName = Optional.ofNullable(dogName).orElse(this.dogName);
+        this.dogBirthDay = Optional.ofNullable(dogBirthDay).orElse(this.dogBirthDay);
+        this.gender = Optional.ofNullable(gender).orElse(this.gender);
+        this.dogBreed = Optional.ofNullable(dogBreed).orElse(this.dogBreed);
+        this.dogWeight = Optional.ofNullable(dogWeight).orElse(this.dogWeight);
+        this.dogNeuter = Optional.ofNullable(dogNeuter).orElse(this.dogNeuter);
+        this.isLostDog = Optional.ofNullable(isLostDog).orElse(this.isLostDog);
+        this.isRegistered = Optional.ofNullable(isRegistered).orElse(this.isRegistered);
+        this.dogImages = Optional.ofNullable(dogImages).orElse(this.dogImages);
+    }
 }

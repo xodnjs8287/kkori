@@ -3,6 +3,8 @@ package com.kkori.kkori.dog.service;
 
 import com.kkori.kkori.dog.dto.RegisterDogRequest;
 import com.kkori.kkori.dog.dto.RegisterDogResponse;
+import com.kkori.kkori.dog.dto.UpdateDogRequest;
+import com.kkori.kkori.dog.dto.UpdateDogResponse;
 import com.kkori.kkori.dog.entity.Dog;
 import com.kkori.kkori.dog.repository.DogRepository;
 import com.kkori.kkori.member.entity.Member;
@@ -33,6 +35,30 @@ public class DogService {
         Dog saved = dogRepository.save(dog);
 
         return new RegisterDogResponse(saved);
+    }
+
+    @Transactional
+    public UpdateDogResponse updateDog(Long memberId, Long dogId, UpdateDogRequest request) {
+        getMember(memberId);
+
+        Dog dog = dogRepository.findById(dogId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 강아지입니다."));
+
+        dog.updateDogInfo(
+                request.getDogName(),
+                request.getDogBirthDay(),
+                request.getGender(),
+                request.getDogBreed(),
+                request.getDogWeight(),
+                request.getDogNeuter(),
+                request.getIsLostDog(),
+                request.getIsRegistered(),
+                request.getDogImages()
+        );
+
+        Dog updatedDog = dogRepository.save(dog);
+
+        return new UpdateDogResponse(updatedDog);
     }
 
     public List<RegisterDogResponse> findAllDogByMemberId(Long memberId){
