@@ -48,7 +48,7 @@ public class RegisterDogResponse {
             LocalDate today = LocalDate.now();
             this.dogAge = Period.between(this.dogBirthDay, today).getYears();
         } else {
-            this.dogAge = 0; // Default age if birth date is not available
+            this.dogAge = 0;
         }
         this.gender = Optional.ofNullable(dog.getGender())
                 .map(gender -> Optional.ofNullable(gender.getEnGender()).orElse(null))
