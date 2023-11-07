@@ -50,10 +50,14 @@ public class LocationService {
             JSONParser jspa = new JSONParser();
             JSONObject jsob = (JSONObject) jspa.parse(reader);
             JSONObject jsrs = (JSONObject) jsob.get("response");
+
+
             JSONObject jsResult = (JSONObject) jsrs.get("result");
             JSONObject jspoitn = (JSONObject) jsResult.get("point");
 
             LocationRequest locationRequest = new LocationRequest();
+
+
             locationRequest.setLatitude(Double.valueOf((String) jspoitn.get("x")));
             locationRequest.setLongitude(Double.valueOf((String) jspoitn.get("y")));
 
@@ -104,7 +108,6 @@ public class LocationService {
 
                 for (String addressPart : addressParts) {
                     log.info(" 주소만 추출 {}", addressPart);
-
                 }
 
 

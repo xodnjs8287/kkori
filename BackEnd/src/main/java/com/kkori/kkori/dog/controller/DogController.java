@@ -7,6 +7,7 @@ import com.kkori.kkori.dog.dto.UpdateDogResponse;
 import com.kkori.kkori.dog.service.DogService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,28 @@ public class DogController {
         long memberId = Long.parseLong(authentication.getName());
 
         return ResponseEntity.ok(dogService.findAllDogByMemberId(memberId));
+    }
+
+    @GetMapping("/detail/{dogId}")
+    public ResponseEntity<RegisterDogResponse> dogDetail(
+            @PathVariable Long dogId
+    ){
+        return ResponseEntity.ok(dogService.dogDetail(dogId));
+    }
+
+    @DeleteMapping("/delete/{dogId}")
+    public ResponseEntity<?> deleteDog (
+            @PathVariable Long dogId,
+            final Authentication authentication
+    ) {
+        long memberId = Long.parseLong(authentication.getName());
+
+        try {
+            dogService.deleteDog(memberId, dogId);
+            return ResponseEntity.ok("강아지 정보가 삭제됨 ");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("/modify/{dogId}")

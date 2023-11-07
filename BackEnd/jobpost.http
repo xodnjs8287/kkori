@@ -1,14 +1,14 @@
-POST https://192.168.100.60:4444/api/post-job
+POST http://localhost:8080/api/post-job
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTkzMzM1MjJ9.7GIUknWVpgaq-j-5j2w_WDKvrYmrWZoQSYni8NrOlAGW-RkKZFG-a4xngdjltQiGgktwZWsY2iJF9emoQpjJDA
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5NDE2OTJ9.u98AkjkYBNA_9XgzIvtE49pw0sD0fSsZxABx6C6_3PqRN_10oaGoXGqW2NLysFfkR0O5uOJ5vaZlkAwbjavoBg
 
 {
   "title" : "제목",
   "content": "내용",
   "payment": 1231323,
-  "address" : "수완동 35-9"
+  "address" : "동산동 159-25"
 }
 
 ###
-GET localhost:8080/api/post/all
+GET https://kkori.kr/api/post/all
 Content-Type: application/json

@@ -16,6 +16,8 @@ import java.util.Optional;
 @Getter
 public class RegisterDogResponse {
 
+    private Long dogId;
+
     private String dogName;
 
     private LocalDate dogBirthDay;
@@ -40,7 +42,7 @@ public class RegisterDogResponse {
         if (dog == null) {
             throw new IllegalArgumentException("dog cannot be null");
         }
-
+        this.dogId = dog.getDogId();
         this.dogName = Optional.ofNullable(dog.getDogName()).orElse(null);
         this.dogBreed = Optional.ofNullable(dog.getDogBreed()).orElse(null);
         this.dogBirthDay = Optional.ofNullable(dog.getDogBirthDay()).orElse(null);

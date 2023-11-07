@@ -10,6 +10,7 @@ import com.kkori.kkori.dog.repository.DogRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,24 @@ public class DogService {
         Dog saved = dogRepository.save(dog);
 
         return new RegisterDogResponse(saved);
+    }
+
+    public RegisterDogResponse dogDetail (Long dogId){
+        Dog dog = getDog(dogId);
+        return new RegisterDogResponse(dog);
+    }
+
+
+    @Transactional
+    public void deleteDog(Long memberId, Long dogId){
+
+        getMember(memberId);
+
+        Dog dog = getDog(dogId);
+
+        dogRepository.delete(dog);
+
+
     }
 
     @Transactional
@@ -76,5 +95,13 @@ public class DogService {
                 );
 
     }
+
+
+    private Dog getDog(Long dogId) {
+        Dog dog = dogRepository.findById(dogId).orElseThrow(()
+                -> new IllegalArgumentException("존재하지 않는 강아지"));
+        return dog;
+    }
+
 
 }

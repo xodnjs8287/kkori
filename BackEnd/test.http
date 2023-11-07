@@ -4,7 +4,7 @@ Content-Type: application/json
 ###
 POST localhost:8080/api/dog/register-dog
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk4NTQ3NTJ9.lR4MvGsfXQZaEMqW2PSi1amYTDcwnVKOtULPWnbKZja1mukMs-A2PhdF7YPm0Eyw62c0FZ_FThs1gU-xTAsZ7A
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5Mzg2NzZ9.9z2YoIPbRHiFFJOByM_RtI2XIAuRqNmSjmHjN705vqJedaVEZ2U482K1nSo_IMmiJyatmSNTr8jqZX1qsgdqfA
 
 {
 
@@ -17,6 +17,16 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJle
   "dogImages": "dogImage"
 
 }
+
+###
+GET localhost:8080/api/dog/detail/6
+Content-Type: application/json
+
+
+###
+DELETE localhost:8080/api/dog/delete/6
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5Mzg2NzZ9.9z2YoIPbRHiFFJOByM_RtI2XIAuRqNmSjmHjN705vqJedaVEZ2U482K1nSo_IMmiJyatmSNTr8jqZX1qsgdqfA
 
 ###
 GET localhost:8080/api/dog/all/by-member
