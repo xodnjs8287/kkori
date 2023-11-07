@@ -19,12 +19,12 @@ Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleH
 }
 
 ###
-GET localhost:8080/api/dog/detail/6
+GET localhost:8080/api/dog/detail/7
 Content-Type: application/json
 
 
 ###
-DELETE localhost:8080/api/dog/delete/6
+DELETE localhost:8080/api/dog/delete/7
 Content-Type: application/json
 Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5Mzg2NzZ9.9z2YoIPbRHiFFJOByM_RtI2XIAuRqNmSjmHjN705vqJedaVEZ2U482K1nSo_IMmiJyatmSNTr8jqZX1qsgdqfA
 
