@@ -5,6 +5,8 @@ import com.kkori.kkori.dog.entity.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.index.qual.Positive;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,12 +24,13 @@ public class RegisterDogRequest {
     private Gender gender;
 
     private String dogBreed;
-
+    
+    @Positive
     private BigDecimal dogWeight;
 
     private Boolean dogNeuter;
 
-    private String dogImages;
+    private MultipartFile dogImage;
 
     public Dog toDog(){
         return Dog.builder()
@@ -37,7 +40,6 @@ public class RegisterDogRequest {
                 .dogBreed(this.dogBreed)
                 .dogWeight(this.dogWeight)
                 .dogNeuter(this.dogNeuter)
-                .dogImages(dogImages)
                 .build();
 
     }

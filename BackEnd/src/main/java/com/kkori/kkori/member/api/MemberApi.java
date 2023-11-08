@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 //@Api(tags = "Member")
 @RestController
@@ -37,7 +38,7 @@ public class MemberApi {
 
     @PostMapping("/register-device")
     public ResponseEntity<RegisterMemberDeviceDto> registerDevice(
-            final Authentication authentication,@RequestBody RegisterMemberDeviceDto registerMemberDeviceDto
+            final Authentication authentication,@Valid @RequestBody RegisterMemberDeviceDto registerMemberDeviceDto
             ){
         return ResponseEntity.ok(memberService.registerDevice(Long.parseLong(authentication.getName()),registerMemberDeviceDto));
     }

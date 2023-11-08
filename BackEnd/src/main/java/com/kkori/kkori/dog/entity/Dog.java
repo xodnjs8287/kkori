@@ -1,5 +1,6 @@
 package com.kkori.kkori.dog.entity;
 
+import com.amazonaws.services.s3.model.MultipartUpload;
 import com.kkori.kkori.baseEntity.BaseEntity;
 import com.kkori.kkori.member.entity.Member;
 import lombok.AccessLevel;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -46,7 +48,7 @@ public class Dog extends BaseEntity {
 
     private Boolean isRegistered;
 
-    private String dogImages;
+    private String dogImage;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -54,6 +56,10 @@ public class Dog extends BaseEntity {
 
     public void setMember (Member member){
         this.member = member;
+    }
+
+    public void setDogImage (String dogImageUrl){
+        this.dogImage = dogImageUrl;
     }
 
     public void updateDogInfo(String dogName, LocalDate dogBirthDay, Gender gender, String dogBreed,
@@ -68,6 +74,6 @@ public class Dog extends BaseEntity {
         this.dogNeuter = Optional.ofNullable(dogNeuter).orElse(this.dogNeuter);
         this.isLostDog = Optional.ofNullable(isLostDog).orElse(this.isLostDog);
         this.isRegistered = Optional.ofNullable(isRegistered).orElse(this.isRegistered);
-        this.dogImages = Optional.ofNullable(dogImages).orElse(this.dogImages);
+//        this.dogImages = Optional.ofNullable(dogImages).orElse(this.dogImages);
     }
 }

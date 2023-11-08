@@ -9,10 +9,12 @@ import com.kkori.kkori.dog.entity.Dog;
 import com.kkori.kkori.dog.repository.DogRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
+import com.kkori.kkori.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,8 @@ public class DogService {
 
     private final DogRepository dogRepository;
 
+    private final S3Service s3Service;
+
     private final MemberRepository memberRepository;
 
     @Transactional
@@ -30,7 +34,16 @@ public class DogService {
 
         Member member = getMember(memberId);
 
+        String imageKey = null;
+
+        if (request.getDogImage() != null && !request.getDogImage().isEmpty()) {
+            imageKey = s3Service.uploadFile(request.getDogImage());
+        }
+
         Dog dog = request.toDog();
+
+        dog.setDogImage(imageKey);
+
         dog.setMember(member);
 
         Dog saved = dogRepository.save(dog);
@@ -60,8 +73,13 @@ public class DogService {
     public UpdateDogResponse updateDog(Long memberId, Long dogId, UpdateDogRequest request) {
         getMember(memberId);
 
-        Dog dog = dogRepository.findById(dogId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 강아지입니다."));
+        Dog dog = getDog(dogId);
+
+        String imageKey = dog.getDogImage();
+        MultipartFile newDogImage = request.getDogImages();
+        if (newDogImage != null && !newDogImage.isEmpty()) {
+            imageKey = s3Service.uploadFile(newDogImage);
+        }
 
         dog.updateDogInfo(
                 request.getDogName(),
@@ -72,7 +90,7 @@ public class DogService {
                 request.getDogNeuter(),
                 request.getIsLostDog(),
                 request.getIsRegistered(),
-                request.getDogImages()
+                imageKey
         );
 
         Dog updatedDog = dogRepository.save(dog);

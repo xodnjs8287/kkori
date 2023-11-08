@@ -55,7 +55,7 @@ public class RegisterDogResponse {
         this.gender = Optional.ofNullable(dog.getGender())
                 .map(gender -> Optional.ofNullable(gender.getEnGender()).orElse(null))
                 .orElse(null);
-        this.dogImages = Optional.ofNullable(dog.getDogImages()).orElse(null);
+        this.dogImages = Optional.ofNullable(dog.getDogImage()).orElse(null);
         this.dogNeuter = Optional.ofNullable(dog.getDogNeuter()).orElse(false);
         this.dogWeight = Optional.ofNullable(dog.getDogWeight()).orElse(null);
         this.isRegistered = Optional.ofNullable(dog.getIsRegistered()).orElse(false);
