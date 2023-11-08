@@ -31,9 +31,7 @@ public class JobBoardService {
 
     @Transactional
     public RegisterJobBoardResponse register(Long id, RegisterJobBoardRequest request) {
-        Member member = memberRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 회원")
-        );
+        Member member = getMember(id);
 
         JobBoard jobBoard = request.toJobBoard();
         jobBoard.assignMember(member);
@@ -50,7 +48,19 @@ public class JobBoardService {
             jobBoard.assignLocation(locationInfo);
         }
 
-        return new RegisterJobBoardResponse(jobBoardRepository.save(jobBoard));
+        RegisterJobBoardResponse registerJobBoardResponse = new RegisterJobBoardResponse(jobBoardRepository.save(jobBoard));
+
+        registerJobBoardResponse.setEmail(member.getEmail());
+        registerJobBoardResponse.setNickName(member.getMemberInfo().getNickName());
+
+        return registerJobBoardResponse;
+    }
+
+    private Member getMember(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 회원")
+        );
+        return member;
     }
 
     public List<RegisterJobBoardResponse> findAll(){
