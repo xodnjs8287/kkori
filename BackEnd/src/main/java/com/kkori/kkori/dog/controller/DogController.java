@@ -1,5 +1,8 @@
 package com.kkori.kkori.dog.controller;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.kkori.kkori.dog.dto.RegisterDogRequest;
 import com.kkori.kkori.dog.dto.RegisterDogResponse;
 import com.kkori.kkori.dog.dto.UpdateDogRequest;
@@ -11,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,11 +28,21 @@ public class DogController {
 
     @PostMapping("/register-dog")
     public ResponseEntity<RegisterDogResponse> registerDog(
-            final Authentication authentication,
-            @RequestBody RegisterDogRequest request
-            ){
+            Authentication authentication,
+            @RequestPart("dog") String dogStr,
+            @RequestPart("image") MultipartFile image) throws IOException {
+
         long memberId = Long.parseLong(authentication.getName());
-        return ResponseEntity.ok(dogService.registerDog(memberId,request));
+
+        // JSON 문자열에서 RegisterDogRequest 객체로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        RegisterDogRequest request = objectMapper.readValue(dogStr, RegisterDogRequest.class);
+        request.setImage(image);
+
+        RegisterDogResponse response = dogService.registerDog(memberId, request);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all/by-member")

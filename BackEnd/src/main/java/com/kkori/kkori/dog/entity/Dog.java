@@ -2,7 +2,6 @@ package com.kkori.kkori.dog.entity;
 
 import com.amazonaws.services.s3.model.MultipartUpload;
 import com.kkori.kkori.baseEntity.BaseEntity;
-import com.kkori.kkori.dogimages.entity.DogImages;
 import com.kkori.kkori.member.entity.Member;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -53,15 +52,10 @@ public class Dog extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "dog", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<DogImages> images = new ArrayList<>();
+    private String image;
 
     public void setMember (Member member){
         this.member = member;
-    }
-
-    public void setImages(List<DogImages> dogImages){
-        this.images = dogImages;
     }
 
     public void updateDogInfo(String dogName, LocalDate dogBirthDay, Gender gender, String dogBreed,
@@ -76,6 +70,5 @@ public class Dog extends BaseEntity {
         this.dogNeuter = Optional.ofNullable(dogNeuter).orElse(this.dogNeuter);
         this.isLostDog = Optional.ofNullable(isLostDog).orElse(this.isLostDog);
         this.isRegistered = Optional.ofNullable(isRegistered).orElse(this.isRegistered);
-//        this.dogImages = Optional.ofNullable(dogImages).orElse(this.dogImages);
     }
 }

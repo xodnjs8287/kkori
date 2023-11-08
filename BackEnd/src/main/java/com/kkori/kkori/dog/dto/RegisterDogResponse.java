@@ -2,7 +2,6 @@ package com.kkori.kkori.dog.dto;
 
 
 import com.kkori.kkori.dog.entity.Dog;
-import com.kkori.kkori.dogimages.entity.DogImages;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +39,8 @@ public class RegisterDogResponse {
 
     private Boolean isRegistered;
 
-    private List<String> imageUrls;
+    private String imageUrl;
+
 
     public RegisterDogResponse(Dog dog) {
         if (dog == null) {
@@ -59,18 +59,12 @@ public class RegisterDogResponse {
         this.gender = Optional.ofNullable(dog.getGender())
                 .map(gender -> Optional.ofNullable(gender.getEnGender()).orElse(null))
                 .orElse(null);
-        List<String> images = Optional.ofNullable(dog.getImages()).orElse(Collections.emptyList())
-                .stream()
-                .map(DogImages::getImageUrl)
-                .collect(Collectors.toList());
 
-        if (!images.isEmpty()) {
-            this.imageUrls = images;
-        }
         this.dogNeuter = Optional.ofNullable(dog.getDogNeuter()).orElse(false);
         this.dogWeight = Optional.ofNullable(dog.getDogWeight()).orElse(null);
         this.isRegistered = Optional.ofNullable(dog.getIsRegistered()).orElse(false);
         this.isLostDog = Optional.ofNullable(dog.getIsLostDog()).orElse(false);
+        this.imageUrl = Optional.ofNullable(dog.getImage()).orElse(null);
     }
 
 }

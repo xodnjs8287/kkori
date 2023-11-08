@@ -7,8 +7,6 @@ import com.kkori.kkori.dog.dto.UpdateDogRequest;
 import com.kkori.kkori.dog.dto.UpdateDogResponse;
 import com.kkori.kkori.dog.entity.Dog;
 import com.kkori.kkori.dog.repository.DogRepository;
-import com.kkori.kkori.dogimages.entity.DogImages;
-import com.kkori.kkori.dogimages.repository.DogImagesRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import com.kkori.kkori.s3.service.S3Service;
@@ -29,8 +27,6 @@ public class DogService {
     private final DogRepository dogRepository;
 
     private final S3Service s3Service;
-    
-    private final DogImagesRepository dogImagesRepository;
 
     private final MemberRepository memberRepository;
 
@@ -39,30 +35,17 @@ public class DogService {
 
         Member member = getMember(memberId);
 
-
         Dog dog = request.toDog();
 
+        String imageUrl = s3Service.uploadFile(request.getImage());
 
+        dog.setImage(imageUrl);
         dog.setMember(member);
 
         Dog savedDog = dogRepository.save(dog);
 
-        List<DogImages> savedImagesList = new ArrayList<>();
 
-        for (MultipartFile image : request.getDogImages()){
-            DogImages images = new DogImages(s3Service.uploadFile(image));
-            
-            images.setDog(savedDog);
-            DogImages savedImage = dogImagesRepository.save(images);
-            savedImagesList.add(savedImage);
-
-        }
-        
-        dog.setImages(savedImagesList);
-
-        Dog save = dogRepository.save(savedDog);
-
-        return new RegisterDogResponse(save);
+        return new RegisterDogResponse(savedDog);
     }
 
     public RegisterDogResponse dogDetail (Long dogId){
@@ -88,6 +71,12 @@ public class DogService {
         getMember(memberId);
 
         Dog dog = getDog(dogId);
+
+//        String imageKey = dog.getDogImage();
+//        MultipartFile newDogImage = request.getDogImages();
+//        if (newDogImage != null && !newDogImage.isEmpty()) {
+//            imageKey = s3Service.uploadFile(newDogImage);
+//        }
 
         dog.updateDogInfo(
                 request.getDogName(),
