@@ -13,7 +13,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -27,14 +29,29 @@ public class MemberApi {
 
     private final MemberService memberService;
 
-    @GetMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest httpServletRequest, @AuthenticationPrincipal User user){
-        HttpSession session = httpServletRequest.getSession();
-        session.invalidate();
-        Long loginId = Long.parseLong(user.getUsername());
-        memberService.deleteRefreshToken(loginId);
-        return ResponseEntity.ok(null);
+@GetMapping("/logout")
+public ResponseEntity<Void> logout(HttpServletRequest httpServletRequest, HttpServletResponse httpResponse, @AuthenticationPrincipal User user){
+    // 세션 무효화
+    HttpSession session = httpServletRequest.getSession();
+    session.invalidate();
+
+    // 리프레시 토큰 삭제
+    Long loginId = Long.parseLong(user.getUsername());
+    memberService.deleteRefreshToken(loginId);
+
+    // 쿠키 삭제
+    Cookie[] cookies = httpServletRequest.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            cookie.setValue("");
+            cookie.setPath("/");
+            cookie.setMaxAge(0);
+            httpResponse.addCookie(cookie);
+        }
     }
+
+    return ResponseEntity.ok(null);
+}
 
     @PostMapping("/register-device")
     public ResponseEntity<RegisterMemberDeviceDto> registerDevice(

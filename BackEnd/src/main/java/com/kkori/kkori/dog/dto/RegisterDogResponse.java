@@ -2,6 +2,7 @@ package com.kkori.kkori.dog.dto;
 
 
 import com.kkori.kkori.dog.entity.Dog;
+import com.kkori.kkori.dogimages.entity.DogImages;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,10 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +40,7 @@ public class RegisterDogResponse {
 
     private Boolean isRegistered;
 
-    private String dogImages;
+    private List<String> imageUrls;
 
     public RegisterDogResponse(Dog dog) {
         if (dog == null) {
@@ -55,7 +59,14 @@ public class RegisterDogResponse {
         this.gender = Optional.ofNullable(dog.getGender())
                 .map(gender -> Optional.ofNullable(gender.getEnGender()).orElse(null))
                 .orElse(null);
-        this.dogImages = Optional.ofNullable(dog.getDogImage()).orElse(null);
+        List<String> images = Optional.ofNullable(dog.getImages()).orElse(Collections.emptyList())
+                .stream()
+                .map(DogImages::getImageUrl)
+                .collect(Collectors.toList());
+
+        if (!images.isEmpty()) {
+            this.imageUrls = images;
+        }
         this.dogNeuter = Optional.ofNullable(dog.getDogNeuter()).orElse(false);
         this.dogWeight = Optional.ofNullable(dog.getDogWeight()).orElse(null);
         this.isRegistered = Optional.ofNullable(dog.getIsRegistered()).orElse(false);

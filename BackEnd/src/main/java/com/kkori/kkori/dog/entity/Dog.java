@@ -2,11 +2,9 @@ package com.kkori.kkori.dog.entity;
 
 import com.amazonaws.services.s3.model.MultipartUpload;
 import com.kkori.kkori.baseEntity.BaseEntity;
+import com.kkori.kkori.dogimages.entity.DogImages;
 import com.kkori.kkori.member.entity.Member;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,10 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -48,23 +49,24 @@ public class Dog extends BaseEntity {
 
     private Boolean isRegistered;
 
-    private String dogImage;
-
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "dog", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<DogImages> images = new ArrayList<>();
 
     public void setMember (Member member){
         this.member = member;
     }
 
-    public void setDogImage (String dogImageUrl){
-        this.dogImage = dogImageUrl;
+    public void setImages(List<DogImages> dogImages){
+        this.images = dogImages;
     }
 
     public void updateDogInfo(String dogName, LocalDate dogBirthDay, Gender gender, String dogBreed,
                               BigDecimal dogWeight, Boolean dogNeuter, Boolean isLostDog,
-                              Boolean isRegistered, String dogImages) {
+                              Boolean isRegistered) {
 
         this.dogName = Optional.ofNullable(dogName).orElse(this.dogName);
         this.dogBirthDay = Optional.ofNullable(dogBirthDay).orElse(this.dogBirthDay);

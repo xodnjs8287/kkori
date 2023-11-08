@@ -23,6 +23,7 @@ public class UpdateDogResponse {
     private Boolean dogNeuter;
     private Boolean isLostDog;
     private Boolean isRegistered;
+
     private String dogImages;
 
     public UpdateDogResponse(Dog dog) {
@@ -34,6 +35,5 @@ public class UpdateDogResponse {
         this.dogNeuter = Optional.ofNullable(dog.getDogNeuter()).orElse(false);
         this.isLostDog = Optional.ofNullable(dog.getIsLostDog()).orElse(false);
         this.isRegistered = Optional.ofNullable(dog.getIsRegistered()).orElse(false);
-        this.dogImages = Optional.ofNullable(dog.getDogImage()).orElse("No Image Available");
     }
 }

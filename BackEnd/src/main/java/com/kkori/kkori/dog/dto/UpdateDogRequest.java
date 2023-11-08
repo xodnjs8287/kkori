@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -22,5 +23,5 @@ public class UpdateDogRequest {
     private Boolean dogNeuter;
     private Boolean isLostDog;
     private Boolean isRegistered;
-    private MultipartFile dogImages;
+    private List<MultipartFile> dogImages;
 }

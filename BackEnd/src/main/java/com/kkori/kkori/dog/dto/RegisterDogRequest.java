@@ -5,11 +5,13 @@ import com.kkori.kkori.dog.entity.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.index.qual.Positive;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -30,7 +32,7 @@ public class RegisterDogRequest {
 
     private Boolean dogNeuter;
 
-    private MultipartFile dogImage;
+    private List<MultipartFile> dogImages = new ArrayList<>();
 
     public Dog toDog(){
         return Dog.builder()
