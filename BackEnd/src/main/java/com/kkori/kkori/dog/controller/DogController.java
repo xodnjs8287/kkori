@@ -34,7 +34,6 @@ public class DogController {
 
         long memberId = Long.parseLong(authentication.getName());
 
-        // JSON 문자열에서 RegisterDogRequest 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
