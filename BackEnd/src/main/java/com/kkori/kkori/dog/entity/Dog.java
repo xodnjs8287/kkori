@@ -60,7 +60,7 @@ public class Dog extends BaseEntity {
 
     public void updateDogInfo(String dogName, LocalDate dogBirthDay, Gender gender, String dogBreed,
                               BigDecimal dogWeight, Boolean dogNeuter, Boolean isLostDog,
-                              Boolean isRegistered) {
+                              Boolean isRegistered,String image) {
 
         this.dogName = Optional.ofNullable(dogName).orElse(this.dogName);
         this.dogBirthDay = Optional.ofNullable(dogBirthDay).orElse(this.dogBirthDay);
@@ -70,5 +70,6 @@ public class Dog extends BaseEntity {
         this.dogNeuter = Optional.ofNullable(dogNeuter).orElse(this.dogNeuter);
         this.isLostDog = Optional.ofNullable(isLostDog).orElse(this.isLostDog);
         this.isRegistered = Optional.ofNullable(isRegistered).orElse(this.isRegistered);
+        this.image = Optional.ofNullable(image).orElse(this.image);
     }
 }

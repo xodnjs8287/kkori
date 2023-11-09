@@ -1,5 +1,6 @@
 package com.kkori.kkori.dog.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -38,6 +39,28 @@ public class DogController {
 
         RegisterDogResponse response = dogService.registerDog(memberId, request);
         return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/modify/{dogId}")
+    public ResponseEntity<UpdateDogResponse> updateDog(
+            @PathVariable Long dogId,
+            Authentication authentication,
+            @RequestPart("dog") String dogStr,
+            @RequestPart("image") MultipartFile image
+    ) throws JsonProcessingException {
+
+        long memberId = Long.parseLong(authentication.getName());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        UpdateDogRequest request = objectMapper.readValue(dogStr, UpdateDogRequest.class);
+        request.setImage(image);
+
+        UpdateDogResponse updateDogResponse = dogService.updateDog(memberId, dogId, request);
+
+        return ResponseEntity.ok(updateDogResponse);
     }
 
     @GetMapping("/all/lost-dog")
@@ -85,15 +108,5 @@ public class DogController {
         }
     }
 
-    @PutMapping("/modify/{dogId}")
-    public ResponseEntity<UpdateDogResponse> updateDog(
-            @PathVariable Long dogId,
-            final Authentication authentication,
-            @RequestBody UpdateDogRequest updateDogRequest
-    ) {
 
-        long memberId = Long.parseLong(authentication.getName());
-
-        return ResponseEntity.ok(dogService.updateDog(memberId, dogId, updateDogRequest));
-    }
 }

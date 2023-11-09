@@ -8,6 +8,7 @@ import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import com.kkori.kkori.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class DogService {
 
@@ -84,11 +86,9 @@ public class DogService {
 
         Dog dog = getDog(dogId);
 
-//        String imageKey = dog.getDogImage();
-//        MultipartFile newDogImage = request.getDogImages();
-//        if (newDogImage != null && !newDogImage.isEmpty()) {
-//            imageKey = s3Service.uploadFile(newDogImage);
-//        }
+        String updatedImage = s3Service.uploadFile(request.getImage());
+
+
 
         dog.updateDogInfo(
                 request.getDogName(),
@@ -98,10 +98,13 @@ public class DogService {
                 request.getDogWeight(),
                 request.getDogNeuter(),
                 request.getIsLostDog(),
-                request.getIsRegistered()
+                request.getIsRegistered(),
+                updatedImage
         );
 
         Dog updatedDog = dogRepository.save(dog);
+
+        log.info(updatedDog.getImage());
 
         return new UpdateDogResponse(updatedDog);
     }

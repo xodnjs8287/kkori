@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.Optional;
 
 @Getter
@@ -37,6 +38,5 @@ public class RegisterJobBoardResponse {
         this.content = Optional.ofNullable(jobBoard.getContentValue()).orElse(null);
         this.payment = Optional.ofNullable(jobBoard.getPayment()).orElse(null);
         this.locationResponse = Optional.ofNullable(jobBoard.getLocationInfo()).map(LocationResponse::new).orElse(null);
-
     }
 }

@@ -34,5 +34,6 @@ public class UpdateDogResponse {
         this.dogNeuter = Optional.ofNullable(dog.getDogNeuter()).orElse(false);
         this.isLostDog = Optional.ofNullable(dog.getIsLostDog()).orElse(false);
         this.isRegistered = Optional.ofNullable(dog.getIsRegistered()).orElse(false);
+        this.dogImage = Optional.ofNullable(dog.getImage()).orElse(null);
     }
 }
