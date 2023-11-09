@@ -3,13 +3,9 @@ package com.kkori.kkori.dog.controller;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.kkori.kkori.dog.dto.RegisterDogRequest;
-import com.kkori.kkori.dog.dto.RegisterDogResponse;
-import com.kkori.kkori.dog.dto.UpdateDogRequest;
-import com.kkori.kkori.dog.dto.UpdateDogResponse;
+import com.kkori.kkori.dog.dto.*;
 import com.kkori.kkori.dog.service.DogService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -44,10 +40,15 @@ public class DogController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/all/lost-dog")
+    public ResponseEntity<List<RegisterDogResponse>> findAllLostDog(){
+        return ResponseEntity.ok(dogService.findAllLostDogs());
+    }
+
     @GetMapping("/all/by-member")
     public ResponseEntity<List<RegisterDogResponse>> findAllByMemberId(
             final Authentication authentication
-    ){
+    ) {
         long memberId = Long.parseLong(authentication.getName());
 
         return ResponseEntity.ok(dogService.findAllDogByMemberId(memberId));
@@ -56,12 +57,21 @@ public class DogController {
     @GetMapping("/detail/{dogId}")
     public ResponseEntity<RegisterDogResponse> dogDetail(
             @PathVariable Long dogId
-    ){
+    ) {
         return ResponseEntity.ok(dogService.dogDetail(dogId));
     }
 
+    @PutMapping("/register-lost/{dogId}")
+    public ResponseEntity<LostDogDto> registerLostDog(
+            @PathVariable Long dogId,
+            final Authentication authentication
+    ) {
+        return ResponseEntity.ok(dogService.registerLostDog(Long.parseLong(authentication.getName()), dogId));
+
+    }
+
     @DeleteMapping("/delete/{dogId}")
-    public ResponseEntity<?> deleteDog (
+    public ResponseEntity<?> deleteDog(
             @PathVariable Long dogId,
             final Authentication authentication
     ) {
@@ -80,10 +90,10 @@ public class DogController {
             @PathVariable Long dogId,
             final Authentication authentication,
             @RequestBody UpdateDogRequest updateDogRequest
-            ){
+    ) {
 
         long memberId = Long.parseLong(authentication.getName());
 
-        return ResponseEntity.ok(dogService.updateDog(memberId,dogId,updateDogRequest));
+        return ResponseEntity.ok(dogService.updateDog(memberId, dogId, updateDogRequest));
     }
 }

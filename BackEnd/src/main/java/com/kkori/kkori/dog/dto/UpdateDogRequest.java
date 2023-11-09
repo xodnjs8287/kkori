@@ -23,5 +23,5 @@ public class UpdateDogRequest {
     private Boolean dogNeuter;
     private Boolean isLostDog;
     private Boolean isRegistered;
-    private List<MultipartFile> dogImages;
+    private String image;
 }

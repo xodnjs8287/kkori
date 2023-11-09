@@ -23,8 +23,7 @@ public class UpdateDogResponse {
     private Boolean dogNeuter;
     private Boolean isLostDog;
     private Boolean isRegistered;
-
-    private String dogImages;
+    private String dogImage;
 
     public UpdateDogResponse(Dog dog) {
         this.dogName = Optional.ofNullable(dog.getDogName()).orElse("Unknown");
