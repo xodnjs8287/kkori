@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ReservedHistoryService {
@@ -32,6 +35,17 @@ public class ReservedHistoryService {
                 .build();
 
         return new ReservedHistoryResponse(reservedHistoryRepository.save(build));
+
+    }
+
+    public List<ReservedHistoryResponse> findAllReservedHistory(Long memberId){
+
+        Member member = getMemberById(memberId);
+        return reservedHistoryRepository.findAllByMember(member)
+                .stream()
+                .map(ReservedHistoryResponse::new)
+                .collect(Collectors.toList());
+
 
     }
 

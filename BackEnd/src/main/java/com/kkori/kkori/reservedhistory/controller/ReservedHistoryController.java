@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/reserved-job")
 @RequiredArgsConstructor
@@ -22,6 +24,15 @@ public class ReservedHistoryController {
             final Authentication authentication
             ){
         return ResponseEntity.ok(reservedHistoryService.makeReserved(sitterEmail,Long.parseLong(authentication.getName()),postId));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ReservedHistoryResponse>> findAllByMember(
+            final Authentication authentication
+    ){
+
+        return ResponseEntity.ok(reservedHistoryService.findAllReservedHistory(Long.parseLong(authentication.getName())));
+
     }
 
     @PutMapping("/completed/{reservedHistoryId}")
