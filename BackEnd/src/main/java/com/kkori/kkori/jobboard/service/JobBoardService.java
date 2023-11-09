@@ -66,9 +66,16 @@ public class JobBoardService {
     public List<RegisterJobBoardResponse> findAll(){
         return jobBoardRepository.findAll()
                 .stream()
-                .map(RegisterJobBoardResponse::new)
+                .map(jobBoard -> {
+                    RegisterJobBoardResponse response = new RegisterJobBoardResponse(jobBoard);
+                    Member member = jobBoard.getMember();
+                    response.setEmail(member.getEmail());
+                    response.setNickName(member.getMemberInfo().getNickName());
+                    return response;
+                })
                 .collect(Collectors.toList());
     }
+
 
 
 
