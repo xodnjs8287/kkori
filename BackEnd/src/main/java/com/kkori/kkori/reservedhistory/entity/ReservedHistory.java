@@ -34,6 +34,10 @@ public class ReservedHistory extends BaseEntity {
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private JobBoard jobBoard;
 
-    private Boolean isReserved;
+    private Boolean isCompleted;
+
+    public void makeCompleted(){
+        this.isCompleted = true;
+    }
 
 }
