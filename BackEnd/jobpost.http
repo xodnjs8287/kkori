@@ -1,14 +1,22 @@
-POST http://localhost:8080/api/post-job
+POST localhost:8080/api/post-job
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5NDE2OTJ9.u98AkjkYBNA_9XgzIvtE49pw0sD0fSsZxABx6C6_3PqRN_10oaGoXGqW2NLysFfkR0O5uOJ5vaZlkAwbjavoBg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
 
 {
-  "title" : "제목",
-  "content": "내용",
-  "payment": 1231323,
-  "address" : "동산동 159-25"
+  "title" : "태빈이",
+  "content": "산책부탁요",
+  "payment": 1000,
+  "address" : "동산동 159-25",
+  "dogIds": [2,3,4]
 }
 
 ###
-GET https://kkori.kr/api/post/all
+GET http://localhost:8080/api/post/all
 Content-Type: application/json
+
+###
+POST http://localhost:8080/api/reserved-job/reserve/xodnjs8287/6
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+Content-Type: application/json
+
+

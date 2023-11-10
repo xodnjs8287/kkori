@@ -6,6 +6,7 @@ import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.validation_field.Content;
 import com.kkori.kkori.validation_field.Title;
+import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,9 +49,12 @@ public class JobBoard extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToMany(mappedBy = "jobBoard")
+    private List<DogJobBoard> dogJobBoards = new ArrayList<>();
+
+
     @OneToMany(mappedBy = "jobBoard",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<ChatRoom> chatRooms = new ArrayList<>();
-
 
     public void assignMember(Member member) {
         if (this.member != null) {

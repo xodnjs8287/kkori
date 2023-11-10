@@ -1,14 +1,19 @@
 package com.kkori.kkori.member.service.impl;
 
+import com.kkori.kkori.error.entity.CustomException;
+import com.kkori.kkori.error.entity.ErrorCode;
+import com.kkori.kkori.member.dto.req.MemberUpdateRequest;
 import com.kkori.kkori.member.dto.res.MemberResponse;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import com.kkori.kkori.member.service.dto.MemberUpdateDto;
 import com.kkori.kkori.member.service.dto.RegisterMemberDeviceDto;
+import com.kkori.kkori.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -16,16 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
-//    private FileManger fileManger = new FileManger();
-////    private final String imgPath = "https://storage.googleapis.com/reon-bucket/";
-//    private final Storage storage;
 
     private final MemberRepository memberRepository;
 
-    public String updateMember(MemberUpdateDto memberUpdateDto) {
-        Member findMember = memberRepository.findById(memberUpdateDto.getLoginId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않은 사용자"));
-        findMember.getMemberInfo().updateMemberInfo(memberUpdateDto);
-        return findMember.getEmail();
+    private final S3Service s3Service;
+
+    @Transactional
+    public MemberUpdateDto updateMember(Long memberId, MemberUpdateRequest memberUpdateRequest) {
+        Member findMember = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("존재하지 않은 사용자"));
+        findMember.getMemberInfo().updateMemberInfo(memberUpdateRequest);
+
+        return new MemberUpdateDto(findMember);
     }
 
     public void deleteRefreshToken(Long id) {
@@ -41,7 +47,7 @@ public class MemberService {
         return new RegisterMemberDeviceDto(save);
     }
 
-    public MemberResponse findMember(Long memberId){
+    public MemberResponse findMember(Long memberId) {
         return new MemberResponse(getMember(memberId));
     }
 
@@ -52,17 +58,19 @@ public class MemberService {
     }
 
 
+    public String updateProfileImg(MultipartFile profileImg, Long loginId) {
+        Member findMember = memberRepository.findById(loginId).orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
+        String imageUrl = s3Service.uploadFile(profileImg);
+
+        findMember.getMemberInfo().updateProfileImg(imageUrl);
+
+        memberRepository.save(findMember);
+
+        return findMember.getEmail();
+    }
+
     //    @Override
-//    public String updateProfileImg(MultipartFile profileImg, Long loginId) {
-//        Member findMember = memberRepository.findById(loginId).orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
-//        if(findMember.getMemberInfo().getProfileImg() != null){
-//            fileManger.removeImgFile(findMember.getMemberInfo().getProfileImg(), storage);
-//        }
-//        String imgName = fileManger.updateImgFile(profileImg, storage);
-//        findMember.getMemberInfo().updateProfileImg(imgName);
-//        return findMember.getEmail();
-//    }
-//    @Override
 //    public String removeProfileImg(Long loginId) {
 //        Member findMember = memberRepository.findById(loginId).orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
 //        if(findMember.getMemberInfo().getProfileImg() != null){

@@ -1,13 +1,12 @@
 package com.kkori.kkori.dog.entity;
 
-import com.amazonaws.services.s3.model.MultipartUpload;
 import com.kkori.kkori.baseEntity.BaseEntity;
 import com.kkori.kkori.member.entity.Member;
+import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -52,7 +51,11 @@ public class Dog extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+
     private String image;
+
+    @OneToMany(mappedBy = "dog")
+    private List<DogJobBoard> dogJobBoards = new ArrayList<>();
 
     public void setMember (Member member){
         this.member = member;

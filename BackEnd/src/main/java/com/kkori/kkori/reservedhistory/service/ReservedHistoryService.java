@@ -1,5 +1,9 @@
 package com.kkori.kkori.reservedhistory.service;
 
+import com.kkori.kkori.dog.dto.RegisterDogResponse;
+import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
+import com.kkori.kkori.dogjobboard.repository.DogJobBoardRepository;
+import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
 import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
 import com.kkori.kkori.member.entity.Member;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +28,8 @@ public class ReservedHistoryService {
     private final JobBoardRepository jobBoardRepository;
 
     private final MemberRepository memberRepository;
+
+    private final DogJobBoardRepository dogJobBoardRepository;
 
     @Transactional
     public ReservedHistoryResponse makeReserved(String sitterEmail, Long memberId, Long jobBoardId) {
@@ -38,6 +45,29 @@ public class ReservedHistoryService {
 
     }
 
+    public List<RegisterJobBoardResponse> findAllByMemberAndSitter(Long sitterId, String deviceNumber){
+        Member member = memberRepository.findByDeviceNumber(deviceNumber)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 멤버"));
+        Member sitter = memberRepository.findById(sitterId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 시터"));
+
+        return reservedHistoryRepository.findAllByMemberAndSitter(member, sitter)
+                .stream()
+                .map(reservedHistory -> {
+                    JobBoard jobBoard = reservedHistory.getJobBoard();
+                    List<DogJobBoard> dogJobBoards = dogJobBoardRepository.findAllByJobBoard(jobBoard);
+                    List<RegisterDogResponse> dogResponses = dogJobBoards.stream()
+                            .map(DogJobBoard::getDog)
+                            .map(dog -> new RegisterDogResponse(dog))
+                            .collect(Collectors.toList());
+
+                    RegisterJobBoardResponse response = new RegisterJobBoardResponse(jobBoard);
+                    response.setDogs(dogResponses);
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
+
     public List<ReservedHistoryResponse> findAllReservedHistory(Long memberId){
 
         Member member = getMemberById(memberId);
@@ -46,8 +76,9 @@ public class ReservedHistoryService {
                 .map(ReservedHistoryResponse::new)
                 .collect(Collectors.toList());
 
-
     }
+
+
 
 
     @Transactional

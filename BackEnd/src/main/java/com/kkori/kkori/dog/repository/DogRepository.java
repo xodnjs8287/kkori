@@ -10,4 +10,7 @@ public interface DogRepository extends JpaRepository<Dog,Long> {
     List<Dog> findAllByMember(Member member);
 
     List<Dog> findAllByIsLostDogIsTrue();
+
+    List<Dog> findAllByMemberId(Long memberId);
+    List<Dog> findAllByDogIdInAndMemberId(List<Long> dogIds, Long memberId);
 }

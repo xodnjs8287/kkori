@@ -2,7 +2,7 @@ POST localhost:8080/api/auth/naver
 Content-Type: application/json
 
 {
-  "authorizationCode": "9zmqjOV7dnCaFdjkej",
+  "authorizationCode": "XRwepmrjcd36eb4eSY",
   "state": null
 }
 
@@ -16,8 +16,23 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJle
 Content-Type: application/json
 
 {
-  "deviceNumber": "helloImdevice"
+  "deviceNumber": "123122"
 }
+
+###
+PUT localhost:8080/api/member/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+
+{
+  "nickName": "나는짱짱맨"
+}
+
+###
+PUT localhost:8080/api/member/image/update
+Content-Type: multipart/form-data;
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU5OTV9._MU28tMvPF5K-2nY4HWPYKr6fTEyA25wc7muZ21AfXhA2R9p47BtIX0PM8n7jTIWcAwZSIUi3Bcp1hL6XkIwMA
+
 
 ###
 GET localhost:8080/api/member/detail

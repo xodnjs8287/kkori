@@ -1,5 +1,6 @@
 package com.kkori.kkori.member.entity;
 
+import com.kkori.kkori.member.dto.req.MemberUpdateRequest;
 import com.kkori.kkori.member.service.dto.MemberUpdateDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class MemberInfo {
     private int deleted;//탈퇴 여부
     private int banned;//신고 여부
 
-    public void updateMemberInfo(MemberUpdateDto memberUpdateDto){
+    public void updateMemberInfo(MemberUpdateRequest memberUpdateDto){
         this.nickName = memberUpdateDto.getNickName();
         this.introduce = memberUpdateDto.getIntroduce();
     }

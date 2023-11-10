@@ -1,6 +1,7 @@
 package com.kkori.kkori.reservedhistory.controller;
 
 
+import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
 import com.kkori.kkori.reservedhistory.dto.ReservedHistoryResponse;
 import com.kkori.kkori.reservedhistory.service.ReservedHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,16 @@ public class ReservedHistoryController {
             final Authentication authentication
             ){
         return ResponseEntity.ok(reservedHistoryService.makeReserved(sitterEmail,Long.parseLong(authentication.getName()),postId));
+    }
+
+    @GetMapping("/qr")
+    public ResponseEntity<List<RegisterJobBoardResponse>> findAllBySitterAndMember(
+            final Authentication authentication,
+            @RequestParam String qrCode
+    ){
+        Long sitterId = Long.parseLong(authentication.getName());
+
+        return ResponseEntity.ok(reservedHistoryService.findAllByMemberAndSitter(sitterId,qrCode));
     }
 
     @GetMapping("/all")

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -25,6 +26,7 @@ public class RegisterJobBoardRequest {
 
     private String address;
 
+    private List<Long> dogIds;
 
     public JobBoard toJobBoard(){
         return JobBoard

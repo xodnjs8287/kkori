@@ -1,20 +1,18 @@
 package com.kkori.kkori.member.service.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.kkori.kkori.member.entity.Member;
+import lombok.*;
 
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Getter
 public class MemberUpdateDto {
-    private Long loginId;
     private String nickName;
     private String introduce;
 
-    @Builder
-    public MemberUpdateDto(Long loginId, String nickName, String introduce) {
-        this.loginId = loginId;
-        this.nickName = nickName;
-        this.introduce = introduce;
+
+    public MemberUpdateDto(Member member) {
+        this.nickName = member.getMemberInfo().getNickName();
+        this.introduce = member.getMemberInfo().getIntroduce();
     }
 }
