@@ -2,26 +2,22 @@ GET localhost:8080/address/api
 Content-Type: application/json
 
 ###
-POST localhost:8080/api/dog/register-dog
-Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5Mzg2NzZ9.9z2YoIPbRHiFFJOByM_RtI2XIAuRqNmSjmHjN705vqJedaVEZ2U482K1nSo_IMmiJyatmSNTr8jqZX1qsgdqfA
-
-{
-
-  "dogName" : "발발이",
-  "dogBirthDay" : "2021-04-21",
-  "gender": "MALE",
-  "dogBreed": "말티즈",
-  "dogWeight": 2.421,
-  "dogNeuter": true,
-  "dogImages": "dogImage"
-
-}
+POST http://localhost:8080/api/dog/register-dog
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk4NjM3MjF9.ErXtAu_abkekAmzv17wkyJ232WFyZIyYfxqIYAm1DvYaoVtzGk6ldg__0WCzkxaLXNlrJttRlFV2WUJ_q5DfOg
+Content-Type: multipart/form-data; boundary=boundary123
 
 ###
-GET localhost:8080/api/dog/detail/7
+GET localhost:8080/api/dog/detail/9
 Content-Type: application/json
 
+###
+PUT localhost:8080/api/dog/register-lost/11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxMDYxNDl9.bOpM5XgVDFYJIPRRFUT94E1pa4PdX4hCmPiOkiIlzQEu1VdgDKgzXERU6pouvYSMAawSMBf6uvlTWv8NrzrEtQ
+
+###
+GET localhost:8080/api/dog/all/lost-dog
+Content-Type: application/json
 
 ###
 DELETE localhost:8080/api/dog/delete/7
@@ -34,10 +30,28 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk4NTQ3NTJ9.lR4MvGsfXQZaEMqW2PSi1amYTDcwnVKOtULPWnbKZja1mukMs-A2PhdF7YPm0Eyw62c0FZ_FThs1gU-xTAsZ7A
 
 ###
-PUT localhost:8080/api/dog/modify/3
+PUT https://kkori.kr/api/dog/modify/26
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk4NTQ3NTJ9.lR4MvGsfXQZaEMqW2PSi1amYTDcwnVKOtULPWnbKZja1mukMs-A2PhdF7YPm0Eyw62c0FZ_FThs1gU-xTAsZ7A
 
 {
-  "dogName": "진솔이"
+  "dogWeight": 223
 }
+
+###
+POST localhost:8080/api/S3test/upload
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk5Mzg2NzZ9.9z2YoIPbRHiFFJOByM_RtI2XIAuRqNmSjmHjN705vqJedaVEZ2U482K1nSo_IMmiJyatmSNTr8jqZX1qsgdqfA
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="filename.jpg"
+Content-Type: image/jpeg
+
+< ./testImage/user1.jpg
+--WebAppBoundary--
+
+###
+GET localhost:8080/api/reserved-job/qr?qrCode=123122
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+Content-Type: application/json
+###
