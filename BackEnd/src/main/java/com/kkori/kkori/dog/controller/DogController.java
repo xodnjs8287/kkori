@@ -108,5 +108,13 @@ public class DogController {
         }
     }
 
+    @GetMapping("/all-lostdog/by-member")
+    public ResponseEntity<List<RegisterDogResponse>> findAllLostDogsByMember(
+            final Authentication authentication
+    ){
+        long l = Long.parseLong(authentication.getName());
+        return ResponseEntity.ok(dogService.findAllLostDogByMemberId(l));
+    }
+
 
 }

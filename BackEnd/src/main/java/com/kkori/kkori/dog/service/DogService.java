@@ -40,7 +40,6 @@ public class DogService {
 
         Dog savedDog = dogRepository.save(dog);
 
-
         return new RegisterDogResponse(savedDog);
     }
 
@@ -83,7 +82,6 @@ public class DogService {
 
         dogRepository.delete(dog);
 
-
     }
 
     @Transactional
@@ -113,6 +111,16 @@ public class DogService {
         log.info(updatedDog.getImage());
 
         return new UpdateDogResponse(updatedDog);
+    }
+
+    public List<RegisterDogResponse> findAllLostDogByMemberId(Long memberId) {
+        Member member = getMember(memberId);
+
+        return dogRepository.findAllByMemberIdAndIsLostDogIsTrue(memberId)
+                .stream()
+                .map(RegisterDogResponse::new)
+                .collect(Collectors.toList());
+
     }
 
     public List<RegisterDogResponse> findAllDogByMemberId(Long memberId) {
