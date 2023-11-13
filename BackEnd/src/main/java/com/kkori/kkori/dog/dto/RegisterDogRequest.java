@@ -48,6 +48,7 @@ public class RegisterDogRequest {
                 .dogBreed(this.dogBreed)
                 .dogWeight(this.dogWeight)
                 .dogNeuter(this.dogNeuter)
+                .isLostDog(false)
                 .build();
 
     }

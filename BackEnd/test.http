@@ -11,13 +11,24 @@ GET localhost:8080/api/dog/detail/9
 Content-Type: application/json
 
 ###
-PUT localhost:8080/api/dog/register-lost/11
+PUT localhost:8080/api/dog/register-lost/8
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxMDYxNDl9.bOpM5XgVDFYJIPRRFUT94E1pa4PdX4hCmPiOkiIlzQEu1VdgDKgzXERU6pouvYSMAawSMBf6uvlTWv8NrzrEtQ
 
 ###
 GET localhost:8080/api/dog/all/lost-dog
 Content-Type: application/json
+
+
+###
+GET localhost:8080/api/dog/all-lostdog/by-member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxMDYxNDl9.bOpM5XgVDFYJIPRRFUT94E1pa4PdX4hCmPiOkiIlzQEu1VdgDKgzXERU6pouvYSMAawSMBf6uvlTWv8NrzrEtQ
+
+###
+GET localhost:8080/api/dog/all-not-lostdog/by-member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxMDYxNDl9.bOpM5XgVDFYJIPRRFUT94E1pa4PdX4hCmPiOkiIlzQEu1VdgDKgzXERU6pouvYSMAawSMBf6uvlTWv8NrzrEtQ
 
 ###
 DELETE localhost:8080/api/dog/delete/7

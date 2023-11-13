@@ -123,6 +123,16 @@ public class DogService {
 
     }
 
+    public List<RegisterDogResponse> findAllNotLostDogByMemberId(Long memberId) {
+        Member member = getMember(memberId);
+
+        return dogRepository.findAllByMemberIdAndIsLostDogIsFalse(memberId)
+                .stream()
+                .map(RegisterDogResponse::new)
+                .collect(Collectors.toList());
+
+    }
+
     public List<RegisterDogResponse> findAllDogByMemberId(Long memberId) {
         Member member = getMember(memberId);
         return dogRepository.findAllByMember(member)
