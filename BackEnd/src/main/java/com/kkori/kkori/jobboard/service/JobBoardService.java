@@ -53,7 +53,7 @@ public class JobBoardService {
         LocationRequest locationRequest = locationService.callXY(request.getAddress());
 
         if (locationRequest != null) {
-            LocationInfo locationInfo = locationRepository.findByLatitudeAndLongitude(
+            LocationInfo locationInfo = locationRepository.findTopByLatitudeAndLongitude(
                     BigDecimal.valueOf(locationRequest.getLatitude()),
                     BigDecimal.valueOf(locationRequest.getLongitude())
             ).orElseGet(() ->

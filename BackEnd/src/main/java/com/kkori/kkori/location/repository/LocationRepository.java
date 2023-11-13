@@ -10,4 +10,7 @@ public interface LocationRepository extends JpaRepository<LocationInfo,Long> {
 
     Optional<LocationInfo> findByLatitudeAndLongitude(BigDecimal latitude, BigDecimal longitude);
 
+    Optional<LocationInfo> findTopByLatitudeAndLongitude(BigDecimal latitude, BigDecimal longitude);
+
+
 }
