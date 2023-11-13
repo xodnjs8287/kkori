@@ -93,6 +93,15 @@ public class DogController {
 
     }
 
+    @PutMapping("/register-found/{dogId}")
+    public ResponseEntity<LostDogDto> registerFoundDog(
+            @PathVariable Long dogId,
+            final Authentication authentication
+    ) {
+        return ResponseEntity.ok(dogService.registerFoundDog(Long.parseLong(authentication.getName()), dogId));
+
+    }
+
     @DeleteMapping("/delete/{dogId}")
     public ResponseEntity<?> deleteDog(
             @PathVariable Long dogId,

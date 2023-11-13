@@ -74,6 +74,25 @@ public class DogService {
 
 
     @Transactional
+    public LostDogDto registerFoundDog(Long memberId, Long dogId) {
+        Member member = getMember(memberId);
+        List<Dog> ownedDogs = member.getDogs();
+
+        Dog dog = getDog(dogId);
+
+        if (!ownedDogs.contains(dog)) {
+            throw new IllegalArgumentException("당신의 강아지가 아닙니다");
+        }
+
+        dog.setIsLostDog(false);
+        Dog savedDog = dogRepository.save(dog);
+
+        return new LostDogDto(savedDog);
+    }
+
+
+
+    @Transactional
     public void deleteDog(Long memberId, Long dogId) {
 
         getMember(memberId);
