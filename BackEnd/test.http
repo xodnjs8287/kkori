@@ -7,7 +7,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiYXV0aCI6InVzZXIiLCJle
 Content-Type: multipart/form-data; boundary=boundary123
 
 ###
-GET localhost:8080/api/dog/detail/9
+GET kkori.kr/api/dog/detail/52
 Content-Type: application/json
 
 ###

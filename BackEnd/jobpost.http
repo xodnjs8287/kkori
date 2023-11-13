@@ -6,7 +6,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJle
   "title" : "태빈이",
   "content": "산책부탁요",
   "payment": 1000,
-  "address" : "동산동 159-25",
+  "address" : "치평동 573-1",
   "dogIds": [2,3,4]
 }
 
@@ -19,4 +19,15 @@ POST http://localhost:8080/api/reserved-job/reserve/xodnjs8287/6
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
 Content-Type: application/json
 
-
+###
+POST http://localhost:8080/api/job-board/like/11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+###
+GET http://localhost:8080/api/job-board/like/all
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+###
+DELETE http://localhost:8080/api/job-board/like/delete-like/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
