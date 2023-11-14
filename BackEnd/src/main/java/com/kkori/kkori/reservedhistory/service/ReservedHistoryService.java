@@ -63,6 +63,8 @@ public class ReservedHistoryService {
 
                     RegisterJobBoardResponse response = new RegisterJobBoardResponse(jobBoard);
                     response.setDogs(dogResponses);
+                    response.setEmail(member.getEmail());
+                    response.setNickName(member.getMemberInfo().getNickName());
                     return response;
                 })
                 .collect(Collectors.toList());
