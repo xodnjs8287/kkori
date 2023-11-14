@@ -37,6 +37,8 @@ public class RegisterJobBoardResponse {
 
     private LocationResponse locationResponse;
 
+    private String profileImage;
+
     private List<RegisterDogResponse> dogs = new ArrayList<>();
 
 
@@ -57,5 +59,7 @@ public class RegisterJobBoardResponse {
         this.content = Optional.ofNullable(jobBoard.getContentValue()).orElse(null);
         this.payment = Optional.ofNullable(jobBoard.getPayment()).orElse(null);
         this.locationResponse = Optional.ofNullable(jobBoard.getLocationInfo()).map(LocationResponse::new).orElse(null);
+        this.profileImage = Optional.ofNullable(jobBoard.getMember().getMemberInfo().getProfileImg()).orElse(null);
+
     }
 }
