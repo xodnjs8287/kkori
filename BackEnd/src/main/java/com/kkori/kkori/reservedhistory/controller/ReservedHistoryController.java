@@ -26,7 +26,9 @@ public class ReservedHistoryController {
             ){
         return ResponseEntity.ok(reservedHistoryService.makeReserved(sitterEmail,Long.parseLong(authentication.getName()),postId));
     }
-
+    // 이건 이제 예약하는 api 인데 산책시키는 사람 이메일이랑 게시물 id 로 예약하는 api
+    // sitter? 이메일을 알면 됨 sitter= 산책시키는 사람
+    // 근데 email 아니여도 돼 그건 상관없음
     @GetMapping("/qr")
     public ResponseEntity<List<RegisterJobBoardResponse>> findAllBySitterAndMember(
             final Authentication authentication,
@@ -53,5 +55,6 @@ public class ReservedHistoryController {
         reservedHistoryService.makeCompleted(reservedHistoryId);
         return ResponseEntity.ok().build();
     }
+
 
 }

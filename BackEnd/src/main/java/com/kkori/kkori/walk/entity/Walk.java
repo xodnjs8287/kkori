@@ -7,7 +7,10 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.awt.datatransfer.FlavorEvent;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,27 +22,43 @@ import java.time.LocalDateTime;
 public class Walk {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "walk_id")
     private Long walkId;
 
     @Column(name = "walk_start_time")
     private LocalDateTime walkStartTime;
 
-    @Column(name = "walk_end_time")
-    private LocalDateTime walkEndTime;
+    private int totalTime;
 
-    @Column(name = "walk_path", nullable = false)
-    private String walkPath;
+    @OneToMany(mappedBy = "walk", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WalkPath> walkPath = new ArrayList<>();
 
     @Column(name = "walk_distance", nullable = false, length = 5)
-    private String walkDistance;
+    private Double walkDistance;
 
     @Column(name = "calories", nullable = false, length = 5)
-    private String calories;
+    private Double calories;
+
+    private Long postId;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "sitter_id", referencedColumnName = "member_id")
+    private Member sitter;
+
+
+    public void setMemberAndSitter(Member member, Member sitter){
+        this.member = member;
+        this.sitter = sitter;
+    }
+
+    public void addWalkPath(List<WalkPath> walkPaths) {
+        this.walkPath = walkPaths;
+    }
+
 
 }
