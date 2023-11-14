@@ -1,13 +1,11 @@
 package com.kkori.kkori.walk.service;
 
+import com.kkori.kkori.dogjobboard.repository.DogJobBoardRepository;
 import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
-import com.kkori.kkori.walk.dto.WalkPathRequest;
-import com.kkori.kkori.walk.dto.WalkPathResponse;
-import com.kkori.kkori.walk.dto.WalkRequest;
-import com.kkori.kkori.walk.dto.WalkResponse;
+import com.kkori.kkori.walk.dto.*;
 import com.kkori.kkori.walk.entity.Walk;
 import com.kkori.kkori.walk.entity.WalkPath;
 import com.kkori.kkori.walk.repository.WalkPathRepository;
@@ -32,6 +30,8 @@ public class WalkService {
     private final MemberRepository memberRepository;
 
     private final WalkPathRepository walkPathRepository;
+
+    private final DogJobBoardRepository dogJobBoardRepository;
 
     @Transactional
     public WalkResponse registerWalk(Long sitterId, WalkRequest walkRequest) {
@@ -75,6 +75,37 @@ public class WalkService {
 
         return walkResponse;
     }
+
+    public WalkDetailResponse walkDetail(Long walkId) {
+        Walk walk = walkRepository.findById(walkId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 산책"));
+
+        JobBoard jobBoard = jobBoardRepository.findById(walk.getPostId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물"));
+
+        WalkDetailResponse walkDetailResponse = new WalkDetailResponse(walk);
+
+        walkDetailResponse.setWalkPath(getWalkPathResponses(walk));
+
+        walkDetailResponse.setPostTitle(jobBoard.getTitleValue());
+
+        List<String> dogNames = dogJobBoardRepository.findAllByJobBoard(jobBoard)
+                .stream()
+                .map(i -> i.getDog().getDogName())
+                .collect(Collectors.toList());
+
+        List<String> dogImages = dogJobBoardRepository.findAllByJobBoard(jobBoard)
+                .stream()
+                .map(i -> i.getDog().getImage())
+                .collect(Collectors.toList());
+
+        walkDetailResponse.setDogName(dogNames);
+        walkDetailResponse.setDogImage(dogImages);
+
+        return walkDetailResponse;
+
+    }
+
 
     private List<WalkPathResponse> getWalkPathResponses(Walk savedWalk) {
         return walkPathRepository.findAllByWalk(savedWalk).stream()

@@ -1,15 +1,13 @@
 package com.kkori.kkori.walk.controller;
 
+import com.kkori.kkori.walk.dto.WalkDetailResponse;
 import com.kkori.kkori.walk.dto.WalkRequest;
 import com.kkori.kkori.walk.dto.WalkResponse;
 import com.kkori.kkori.walk.service.WalkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +24,12 @@ public class WalkController {
         long sitterId = Long.parseLong(authentication.getName());
         return ResponseEntity.ok(walkService.registerWalk(sitterId,walkRequest));
 
+    }
+
+    @GetMapping("/detail/{walkId}")
+    public ResponseEntity<WalkDetailResponse> detail(
+            @PathVariable Long walkId
+    ){
+        return ResponseEntity.ok(walkService.walkDetail(walkId));
     }
 }
