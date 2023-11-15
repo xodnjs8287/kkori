@@ -53,6 +53,7 @@ public class ReservedHistoryService {
 
         return reservedHistoryRepository.findAllByMemberAndSitter(member, sitter)
                 .stream()
+                .filter(it-> it.getIsCompleted().equals(Boolean.FALSE))
                 .map(reservedHistory -> {
                     JobBoard jobBoard = reservedHistory.getJobBoard();
                     List<DogJobBoard> dogJobBoards = dogJobBoardRepository.findAllByJobBoard(jobBoard);

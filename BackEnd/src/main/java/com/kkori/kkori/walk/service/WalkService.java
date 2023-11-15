@@ -8,6 +8,8 @@ import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
+import com.kkori.kkori.reservedhistory.entity.ReservedHistory;
+import com.kkori.kkori.reservedhistory.repository.ReservedHistoryRepository;
 import com.kkori.kkori.walk.dto.*;
 import com.kkori.kkori.walk.entity.Walk;
 import com.kkori.kkori.walk.entity.WalkPath;
@@ -31,6 +33,8 @@ public class WalkService {
     private final JobBoardRepository jobBoardRepository;
 
     private final MemberRepository memberRepository;
+
+    private final ReservedHistoryRepository reservedHistoryRepository;
 
     private final WalkPathRepository walkPathRepository;
 
@@ -66,6 +70,12 @@ public class WalkService {
 
         Walk savedWalk = walkRepository.save(saved);
 
+        ReservedHistory reservedHistory = reservedHistoryRepository.findByJobBoard_PostId(savedWalk.getPostId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물"));
+
+        reservedHistory.makeCompleted();
+
+        reservedHistoryRepository.save(reservedHistory);
 
         WalkResponse walkResponse = new WalkResponse(savedWalk);
 
