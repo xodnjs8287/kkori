@@ -1,10 +1,10 @@
 package com.kkori.kkori.jobboard.service;
 
-import com.kkori.kkori.dog.dto.DogResponse;
 import com.kkori.kkori.dog.dto.RegisterDogResponse;
 import com.kkori.kkori.dog.entity.Dog;
 import com.kkori.kkori.dog.repository.DogRepository;
 import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
+import com.kkori.kkori.dogjobboard.repository.DogJobBoardRepository;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardRequest;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
 import com.kkori.kkori.jobboard.entity.JobBoard;
@@ -15,7 +15,6 @@ import com.kkori.kkori.location.repository.LocationRepository;
 import com.kkori.kkori.location.service.LocationService;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
-import com.kkori.kkori.dogjobboard.repository.DogJobBoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -63,7 +62,7 @@ public class JobBoardService {
         }
 
 
-        JobBoard savedJobBoard  = jobBoardRepository.save(jobBoard);
+        JobBoard savedJobBoard = jobBoardRepository.save(jobBoard);
 
         for (Dog dog : selectedDogs) {
 
@@ -75,7 +74,6 @@ public class JobBoardService {
         }
 
 
-
         List<RegisterDogResponse> dogResponses = selectedDogs.stream()
                 .map(dog -> {
                     Dog save = dogRepository.findById(dog.getDogId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 강아지"));
@@ -83,7 +81,7 @@ public class JobBoardService {
                 })
                 .collect(Collectors.toList());
 
-        RegisterJobBoardResponse registerJobBoardResponse = new RegisterJobBoardResponse(savedJobBoard,dogResponses);
+        RegisterJobBoardResponse registerJobBoardResponse = new RegisterJobBoardResponse(savedJobBoard, dogResponses);
 
         registerJobBoardResponse.setEmail(member.getEmail());
         registerJobBoardResponse.setNickName(member.getMemberInfo().getNickName());
@@ -92,14 +90,29 @@ public class JobBoardService {
         return registerJobBoardResponse;
     }
 
-    private Member getMember(Long id) {
-        Member member = memberRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 회원")
-        );
-        return member;
+    public List<RegisterJobBoardResponse> findAllByMember(Long memberId) {
+        Member member = getMember(memberId);
+
+        return jobBoardRepository.findAllByMember(member)
+                .stream()
+                .map(RegisterJobBoardResponse::new)
+                .collect(Collectors.toList());
+
     }
 
-    public List<RegisterJobBoardResponse> findAll(){
+    public void deleteJobBoard(Long memberId, Long postId) {
+        Member member = getMember(memberId);
+
+        jobBoardRepository.findByMember(member).orElseThrow(
+                () -> new IllegalArgumentException("작성한 게시물이 아닙니다")
+        );
+
+        JobBoard jobBoard = getJobBoard(postId);
+        jobBoardRepository.delete(jobBoard);
+    }
+
+
+    public List<RegisterJobBoardResponse> findAll() {
         return jobBoardRepository.findAll()
                 .stream()
                 .map(jobBoard -> {
@@ -122,8 +135,19 @@ public class JobBoardService {
                 .collect(Collectors.toList());
     }
 
+    private Member getMember(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 회원")
+        );
+        return member;
+    }
 
+    private JobBoard getJobBoard(Long id) {
+        return jobBoardRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 게시물")
+        );
 
+    }
 
 
 }

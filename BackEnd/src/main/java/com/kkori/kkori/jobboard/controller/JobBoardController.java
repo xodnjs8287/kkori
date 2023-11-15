@@ -28,7 +28,26 @@ public class JobBoardController {
     }
 
     @GetMapping("/post/all")
-    public ResponseEntity<List<RegisterJobBoardResponse>> findAll(){
+    public ResponseEntity<List<RegisterJobBoardResponse>> findAll() {
         return ResponseEntity.ok(jobBoardService.findAll());
+    }
+
+    @GetMapping("/post/all/by-member")
+    public ResponseEntity<List<RegisterJobBoardResponse>> findAll(
+            final Authentication authentication
+    ) {
+        long memberId = Long.parseLong(authentication.getName());
+
+        return ResponseEntity.ok(jobBoardService.findAllByMember(memberId));
+    }
+
+    @DeleteMapping("/post/delete/{postId}")
+    public void deletePost(
+            final Authentication authentication,
+            @PathVariable Long postId
+    ) {
+
+        long memberId = Long.parseLong(authentication.getName());
+        jobBoardService.deleteJobBoard(memberId,postId);
     }
 }
