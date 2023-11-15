@@ -43,9 +43,7 @@ public class ReservedHistoryController {
     public ResponseEntity<List<ReservedHistoryResponse>> findAllByMember(
             final Authentication authentication
     ){
-
         return ResponseEntity.ok(reservedHistoryService.findAllReservedHistory(Long.parseLong(authentication.getName())));
-
     }
 
     @PutMapping("/completed/{reservedHistoryId}")

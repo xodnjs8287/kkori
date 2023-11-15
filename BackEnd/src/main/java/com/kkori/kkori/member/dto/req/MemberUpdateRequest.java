@@ -12,6 +12,4 @@ import lombok.experimental.SuperBuilder;
 public class MemberUpdateRequest {
     private String nickName;
     private String introduce;
-
-
 }

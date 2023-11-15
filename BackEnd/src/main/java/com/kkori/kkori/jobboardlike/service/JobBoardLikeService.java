@@ -1,6 +1,9 @@
 package com.kkori.kkori.jobboardlike.service;
 
 
+import com.kkori.kkori.dog.dto.RegisterDogResponse;
+import com.kkori.kkori.dog.entity.Dog;
+import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
 import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
@@ -9,6 +12,7 @@ import com.kkori.kkori.jobboardlike.repository.JobBoardLikeRepository;
 import com.kkori.kkori.member.entity.Member;
 import com.kkori.kkori.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class JobBoardLikeService {
 
@@ -62,9 +67,25 @@ public class JobBoardLikeService {
 
         List<JobBoardLike> byMember = jobBoardLikeRepository.findByMember(member);
 
-        return byMember.stream()
-                .map(like -> new RegisterJobBoardResponse(like.getJobBoard()))
+        List<JobBoard> jobBoards = byMember.stream()
+                .map(JobBoardLike::getJobBoard)
                 .collect(Collectors.toList());
+
+
+        List<RegisterJobBoardResponse> responses = jobBoards.stream()
+                .map(jobBoard -> {
+                    List<DogJobBoard> dogJobBoards = jobBoard.getDogJobBoards();
+
+                    List<RegisterDogResponse> dogs = dogJobBoards.stream()
+                            .map(DogJobBoard::getDog)
+                            .map(RegisterDogResponse::new)
+                            .collect(Collectors.toList());
+
+                    return new RegisterJobBoardResponse(jobBoard, dogs);
+                })
+                .collect(Collectors.toList());
+
+        return responses;
 
     }
 

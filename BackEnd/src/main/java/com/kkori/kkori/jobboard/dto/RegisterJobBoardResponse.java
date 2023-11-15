@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -37,6 +36,8 @@ public class RegisterJobBoardResponse {
 
     private LocationResponse locationResponse;
 
+    private LocalDateTime createdTime;
+
     private String profileImage;
 
     private List<RegisterDogResponse> dogs = new ArrayList<>();
@@ -50,6 +51,9 @@ public class RegisterJobBoardResponse {
         this.payment = Optional.ofNullable(jobBoard.getPayment()).orElse(null);
         this.locationResponse = Optional.ofNullable(jobBoard.getLocationInfo()).map(LocationResponse::new).orElse(null);
         this.dogs = dogs;
+        this.createdTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        this.profileImage = Optional.ofNullable(jobBoard.getMember().getMemberInfo().getProfileImg()).orElse(null);
+
     }
 
     public RegisterJobBoardResponse (JobBoard jobBoard) {
@@ -60,6 +64,7 @@ public class RegisterJobBoardResponse {
         this.payment = Optional.ofNullable(jobBoard.getPayment()).orElse(null);
         this.locationResponse = Optional.ofNullable(jobBoard.getLocationInfo()).map(LocationResponse::new).orElse(null);
         this.profileImage = Optional.ofNullable(jobBoard.getMember().getMemberInfo().getProfileImg()).orElse(null);
+        this.createdTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
     }
 }
