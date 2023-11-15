@@ -103,10 +103,6 @@ public class JobBoardService {
     public void deleteJobBoard(Long memberId, Long postId) {
         Member member = getMember(memberId);
 
-        jobBoardRepository.findByMember(member).orElseThrow(
-                () -> new IllegalArgumentException("작성한 게시물이 아닙니다")
-        );
-
         JobBoard jobBoard = getJobBoard(postId);
         jobBoardRepository.delete(jobBoard);
     }

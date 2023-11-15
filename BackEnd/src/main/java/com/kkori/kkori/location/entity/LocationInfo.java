@@ -29,12 +29,12 @@ public class LocationInfo {
     private String city;
     private String dong;
 
-    @OneToMany(mappedBy = "locationInfo")
+    @OneToMany(mappedBy = "locationInfo",cascade = CascadeType.REMOVE,orphanRemoval = true)
     @Builder.Default
     private Set<JobBoard> jobBoards = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "locationInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "locationInfo", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<UserRegion> userRegions = new HashSet<>();
 }
 

@@ -2,8 +2,11 @@ package com.kkori.kkori.jobboard.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
 import com.kkori.kkori.chatroom.entity.ChatRoom;
+import com.kkori.kkori.jobboardlike.entity.JobBoardLike;
 import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.member.entity.Member;
+import com.kkori.kkori.postlikes.entity.PostLikes;
+import com.kkori.kkori.reservedhistory.entity.ReservedHistory;
 import com.kkori.kkori.validation_field.Content;
 import com.kkori.kkori.validation_field.Title;
 import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
@@ -49,12 +52,17 @@ public class JobBoard extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "jobBoard")
+    @OneToMany(mappedBy = "jobBoard",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<DogJobBoard> dogJobBoards = new ArrayList<>();
 
+    @OneToMany(mappedBy = "jobBoard",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    private List<ReservedHistory> reservedHistories = new ArrayList<>();
 
     @OneToMany(mappedBy = "jobBoard",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<ChatRoom> chatRooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jobBoard",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    private List<JobBoardLike> jobBoardLikes = new ArrayList<>();
 
     public void assignMember(Member member) {
         if (this.member != null) {

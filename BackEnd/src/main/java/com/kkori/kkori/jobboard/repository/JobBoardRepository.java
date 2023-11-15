@@ -9,6 +9,4 @@ import java.util.Optional;
 
 public interface JobBoardRepository extends JpaRepository<JobBoard,Long> {
     List<JobBoard> findAllByMember(Member member);
-
-    Optional<JobBoard> findByMember(Member member);
 }
