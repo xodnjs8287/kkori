@@ -24,7 +24,6 @@ public class ReservedHistory extends BaseEntity {
     private Long reservedHistoryId;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
 
     @ManyToOne

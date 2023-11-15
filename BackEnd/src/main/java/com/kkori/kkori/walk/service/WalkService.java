@@ -1,6 +1,9 @@
 package com.kkori.kkori.walk.service;
 
+import com.kkori.kkori.dog.repository.DogRepository;
+import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
 import com.kkori.kkori.dogjobboard.repository.DogJobBoardRepository;
+import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
 import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
 import com.kkori.kkori.member.entity.Member;
@@ -36,12 +39,10 @@ public class WalkService {
     @Transactional
     public WalkResponse registerWalk(Long sitterId, WalkRequest walkRequest) {
 
-        Member member = memberRepository.findById(walkRequest.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 멤버"));
+        Member member = getMember(walkRequest.getMemberId());
 
 
-        Member sitter = memberRepository.findById(sitterId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 멤버"));
+        Member sitter = getSitter(sitterId);
 
         JobBoard jobBoard = jobBoardRepository.findById(walkRequest.getPostId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물"));
@@ -76,8 +77,22 @@ public class WalkService {
         return walkResponse;
     }
 
-    public WalkDetailResponse walkDetail(Long walkId) {
-        Walk walk = walkRepository.findById(walkId)
+    private Member getSitter(Long sitterId) {
+        Member sitter = memberRepository.findById(sitterId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 멤버"));
+        return sitter;
+    }
+
+    private Member getMember(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 멤버"));
+        return member;
+    }
+
+
+    //알바생 입장
+    public WalkDetailResponse walkDetail(Long postId) {
+        Walk walk = walkRepository.findByPostId(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 산책"));
 
         JobBoard jobBoard = jobBoardRepository.findById(walk.getPostId())
@@ -104,6 +119,19 @@ public class WalkService {
 
         return walkDetailResponse;
 
+    }
+
+    public List<WalkDetailResponse> findAllByDog(Long dogId){
+
+        List<JobBoard> jobBoards = dogJobBoardRepository.findAllByDog_DogId(dogId)
+                .stream()
+                .map(DogJobBoard::getJobBoard)
+                .collect(Collectors.toList());
+
+        return jobBoards.stream()
+                .flatMap(jobBoard -> walkRepository.findAllByPostId(jobBoard.getPostId()).stream())
+                .map(WalkDetailResponse::new)
+                .collect(Collectors.toList());
     }
 
 

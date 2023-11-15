@@ -9,6 +9,9 @@ import java.util.List;
 public interface ReservedHistoryRepository extends JpaRepository<ReservedHistory,Long> {
     List<ReservedHistory> findAllByMember (Member member);
 
+    List<ReservedHistory> findAllBySitter (Member sitter);
+
+
     List<ReservedHistory> findAllByMemberAndSitter(Member member, Member sitter);
 
 

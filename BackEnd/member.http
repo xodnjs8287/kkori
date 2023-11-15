@@ -1,8 +1,8 @@
-POST localhost:8080/api/auth/naver
+POST https://kkori.kr/api/auth/naver
 Content-Type: application/json
 
 {
-  "authorizationCode": "XRwepmrjcd36eb4eSY",
+  "authorizationCode": "rG587l1JISjyD6KrvY",
   "state": null
 }
 
@@ -11,21 +11,21 @@ GET localhost:8080/api/member/logout
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk1MTQ3NTh9.R2x13WP5_I-KKSmFAWBxSdzsj1L4HOSTsmQ3OwTFkHaIsX6H1wPZabORTWS48A67TD_qyLJ198mRS_5UAjZ8xQ
 
 ###
-POST localhost:8080/api/member/register-device
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk1MTQ3NTh9.R2x13WP5_I-KKSmFAWBxSdzsj1L4HOSTsmQ3OwTFkHaIsX6H1wPZabORTWS48A67TD_qyLJ198mRS_5UAjZ8xQ
+POST https://kkori.kr/api/member/register-device
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA1NDk3MjB9.f6fHH9FlD8X5OL-0wZUaShrw1D5utw6Y36OAXh2Oey2xXx_l3MKtSSqWK56yw9TftaU_X_UAqNhpTDz-kX8ZMw
 Content-Type: application/json
 
 {
-  "deviceNumber": "123122"
+  "deviceNumber": "123456"
 }
 
 ###
-PUT localhost:8080/api/member/update
+PUT https://kkori.kr/api/member/update
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA1NDk3MjB9.f6fHH9FlD8X5OL-0wZUaShrw1D5utw6Y36OAXh2Oey2xXx_l3MKtSSqWK56yw9TftaU_X_UAqNhpTDz-kX8ZMw
 
 {
-  "nickName": "나는짱짱맨"
+  "nickName": "나는짱짱맨23"
 }
 
 ###

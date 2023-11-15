@@ -80,6 +80,17 @@ public class ReservedHistoryService {
 
     }
 
+    public List<RegisterJobBoardResponse> findAllReservedHistoryBySitter(Long sitterId){
+        Member member = getMemberById(sitterId);
+
+         return reservedHistoryRepository.findAllBySitter(member)
+                .stream()
+                .map(ReservedHistory::getJobBoard)
+                .map(RegisterJobBoardResponse::new)
+                .collect(Collectors.toList());
+
+    }
+
 
 
 

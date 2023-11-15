@@ -54,5 +54,12 @@ public class ReservedHistoryController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/all/by-sitter")
+    public ResponseEntity<List<RegisterJobBoardResponse>> findAllBySitter(final Authentication authentication){
+        long sitterId = Long.parseLong(authentication.getName());
+
+        return ResponseEntity.ok(reservedHistoryService.findAllReservedHistoryBySitter(sitterId));
+    }
+
 
 }
