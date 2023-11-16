@@ -1,8 +1,8 @@
-POST https://kkori.kr/api/auth/naver
+POST localhost:8080/api/auth/naver
 Content-Type: application/json
 
 {
-  "authorizationCode": "rG587l1JISjyD6KrvY",
+  "authorizationCode": "ObpxKzxbVzxsyYDLyU",
   "state": null
 }
 
@@ -11,8 +11,8 @@ GET localhost:8080/api/member/logout
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE2OTk1MTQ3NTh9.R2x13WP5_I-KKSmFAWBxSdzsj1L4HOSTsmQ3OwTFkHaIsX6H1wPZabORTWS48A67TD_qyLJ198mRS_5UAjZ8xQ
 
 ###
-POST https://kkori.kr/api/member/register-device
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA1NDk3MjB9.f6fHH9FlD8X5OL-0wZUaShrw1D5utw6Y36OAXh2Oey2xXx_l3MKtSSqWK56yw9TftaU_X_UAqNhpTDz-kX8ZMw
+POST localhost:8080/api/member/register-device
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA2NDI1ODJ9.dyc7a4An-RkYHDAiqzXhZd-OU8SMiLNTqoCghlK55ngBXFWaDZKtV6t3-qltmesxC_Ln7mrjMgh-G4yKTxnAqw
 Content-Type: application/json
 
 {

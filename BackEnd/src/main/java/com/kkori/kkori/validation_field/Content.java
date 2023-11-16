@@ -28,7 +28,7 @@ public class Content {
 
     private void validateReviewNotEmpty(String review) {
         if (Objects.isNull(review) || review.isEmpty()) {
-            throw new IllegalArgumentException("빈 칸이여선 안됩니다.");
+            throw new IllegalArgumentException("내용은 빈 칸이여선 안됩니다.");
         }
     }
 

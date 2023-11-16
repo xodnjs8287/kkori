@@ -7,6 +7,8 @@ import com.kkori.kkori.dogjobboard.entity.DogJobBoard;
 import com.kkori.kkori.dogjobboard.repository.DogJobBoardRepository;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardRequest;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
+import com.kkori.kkori.jobboard.dto.UpdateJobBoardRequest;
+import com.kkori.kkori.jobboard.dto.UpdateJobBoardResponse;
 import com.kkori.kkori.jobboard.entity.JobBoard;
 import com.kkori.kkori.jobboard.repository.JobBoardRepository;
 import com.kkori.kkori.location.dto.LocationRequest;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -88,6 +91,47 @@ public class JobBoardService {
 
 
         return registerJobBoardResponse;
+    }
+
+
+    @Transactional
+    public UpdateJobBoardResponse updateJobBoard(Long memberId, Long jobBoardId, UpdateJobBoardRequest updateJobBoardRequest) {
+
+        Member member = getMember(memberId);
+
+        JobBoard jobBoard = getJobBoard(jobBoardId);
+
+        jobBoard.updateJobBoard(updateJobBoardRequest);
+
+        List<Dog> selectedDogs = Collections.emptyList();
+        if (updateJobBoardRequest != null && updateJobBoardRequest.getDogIds() != null) {
+            selectedDogs = dogRepository.findAllByDogIdInAndMemberId(updateJobBoardRequest.getDogIds(), memberId);
+            if (selectedDogs.isEmpty()) {
+                throw new IllegalArgumentException("선택된 강아지가 없습니다.");
+            }
+        }
+
+        LocationRequest locationRequest;
+        if (updateJobBoardRequest != null && updateJobBoardRequest.getAddress() != null && !updateJobBoardRequest.getAddress().isEmpty()) {
+            locationRequest = locationService.callXY(updateJobBoardRequest.getAddress());
+        } else {
+            locationRequest = null;
+        }
+
+        if (locationRequest != null) {
+            LocationInfo locationInfo = locationRepository.findTopByLatitudeAndLongitude(
+                    BigDecimal.valueOf(locationRequest.getLatitude()),
+                    BigDecimal.valueOf(locationRequest.getLongitude())
+            ).orElseGet(() -> locationService.callApi(locationRequest));
+
+            jobBoard.assignLocation(locationInfo);
+        }
+
+
+        JobBoard save = jobBoardRepository.save(jobBoard);
+
+        return new UpdateJobBoardResponse(save);
+
     }
 
     public List<RegisterJobBoardResponse> findAllByMember(Long memberId) {

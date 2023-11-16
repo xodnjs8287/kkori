@@ -62,7 +62,52 @@ Content-Type: image/jpeg
 --WebAppBoundary--
 
 ###
-GET localhost:8080/api/reserved-job/qr?qrCode=123122
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDAxODU3MjV9.64d82GLA82XxjExV_m_XAt5JY7-g3p4e0nYoi6o0oePLDQDXSu0wptyTfxwANRmTfFaQ8jCBPu4RssKddUcVJQ
+GET localhost:8080/api/reserved-job/qr?qrCode=123456
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA2NDI1ODJ9.dyc7a4An-RkYHDAiqzXhZd-OU8SMiLNTqoCghlK55ngBXFWaDZKtV6t3-qltmesxC_Ln7mrjMgh-G4yKTxnAqw
 Content-Type: application/json
 ###
+POST localhost:8080/api/walk/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA2NDI1ODJ9.dyc7a4An-RkYHDAiqzXhZd-OU8SMiLNTqoCghlK55ngBXFWaDZKtV6t3-qltmesxC_Ln7mrjMgh-G4yKTxnAqw
+
+{
+  "walkStartTime": "2023-11-14T08:30:00",
+  "totalTime": 60,
+  "walkPath": [
+    {
+      "latitude": 35.2051917,
+      "latitudeDelta": 0.003,
+      "longitude": 126.8117233,
+      "longitudeDelta": 0.003
+    },
+    {
+      "latitude": 35.205184,
+      "latitudeDelta": 0.003,
+      "longitude": 126.8117053,
+      "longitudeDelta": 0.003
+    },
+    {
+      "latitude": 35.2051808,
+      "latitudeDelta": 0.003,
+      "longitude": 126.8117107,
+      "longitudeDelta": 0.003
+    }
+  ],
+  "walkDistance": 2.5,
+  "calories": 150.0,
+  "postId": 1,
+  "memberId": 1
+}
+
+###
+GET localhost:8080/api/walk/detail/5
+Content-Type: application/json
+
+###
+GET localhost:8080/api/walk/detail/by-member/1
+Content-Type: application/json
+
+###
+DELETE localhost:8080/api/post/delete/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA2MjA0MTZ9.zi5s9VaaKmfEK_qEOewyLkqmKIiG-r2VB7Z1TlSsQNmuIW0MqN_xdRNZI-0N0fu7sLqbWiWTxf4kWbPgYskvvg

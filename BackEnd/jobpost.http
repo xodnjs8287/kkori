@@ -37,3 +37,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJle
 ###
 GET http://localhost:8080/api/walk/detail/by-sitter/1
 Content-Type: application/json
+
+###
+PUT http://localhost:8080/api/post/update/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6InVzZXIiLCJleHAiOjE3MDA2MjA0MTZ9.zi5s9VaaKmfEK_qEOewyLkqmKIiG-r2VB7Z1TlSsQNmuIW0MqN_xdRNZI-0N0fu7sLqbWiWTxf4kWbPgYskvvg
+
+{
+  "content": "하윙"
+}

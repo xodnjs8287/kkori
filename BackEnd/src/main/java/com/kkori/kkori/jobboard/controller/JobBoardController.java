@@ -2,6 +2,8 @@ package com.kkori.kkori.jobboard.controller;
 
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardRequest;
 import com.kkori.kkori.jobboard.dto.RegisterJobBoardResponse;
+import com.kkori.kkori.jobboard.dto.UpdateJobBoardRequest;
+import com.kkori.kkori.jobboard.dto.UpdateJobBoardResponse;
 import com.kkori.kkori.jobboard.service.JobBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +41,17 @@ public class JobBoardController {
         long memberId = Long.parseLong(authentication.getName());
 
         return ResponseEntity.ok(jobBoardService.findAllByMember(memberId));
+    }
+
+    @PutMapping("/post/update/{postId}")
+    public ResponseEntity<UpdateJobBoardResponse> updateJobBoard(
+            @PathVariable Long postId,
+            final Authentication authentication,
+            @RequestBody UpdateJobBoardRequest updateJobBoardRequest
+            ) {
+        long memberId = Long.parseLong(authentication.getName());
+        return ResponseEntity.ok(jobBoardService.updateJobBoard(memberId,postId,updateJobBoardRequest));
+
     }
 
     @DeleteMapping("/post/delete/{postId}")

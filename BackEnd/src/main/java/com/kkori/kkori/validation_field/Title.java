@@ -27,7 +27,7 @@ public class Title {
 
     private void validateTitleNotEmpty(String title) {
         if (Objects.isNull(title) || title.isEmpty()) {
-            throw new IllegalArgumentException("빈 칸 이어서는 안됩니다.");
+            throw new IllegalArgumentException("제목이 빈 칸 이어서는 안됩니다.");
         }
     }
 

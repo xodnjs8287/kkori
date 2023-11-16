@@ -2,6 +2,8 @@ package com.kkori.kkori.jobboard.entity;
 
 import com.kkori.kkori.baseEntity.BaseEntity;
 import com.kkori.kkori.chatroom.entity.ChatRoom;
+import com.kkori.kkori.dog.entity.Dog;
+import com.kkori.kkori.jobboard.dto.UpdateJobBoardRequest;
 import com.kkori.kkori.jobboardlike.entity.JobBoardLike;
 import com.kkori.kkori.location.entity.LocationInfo;
 import com.kkori.kkori.member.entity.Member;
@@ -21,6 +23,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -88,6 +91,25 @@ public class JobBoard extends BaseEntity {
             return content.getContent();
         }
         return null;
+    }
+
+    public void updateJobBoard(UpdateJobBoardRequest updateJobBoardRequest){
+        if (updateJobBoardRequest.getTitle() != null) {
+            this.title = new Title(updateJobBoardRequest.getTitle());
+        }
+
+        if (updateJobBoardRequest.getContent() != null) {
+            this.content = new Content(updateJobBoardRequest.getContent());
+        }
+
+        if (updateJobBoardRequest.getPayment() != null) {
+            this.payment = updateJobBoardRequest.getPayment();
+        }
+    }
+
+
+    public void updateLocation(LocationInfo location){
+        this.locationInfo = location;
     }
 
 
